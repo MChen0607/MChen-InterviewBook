@@ -21,6 +21,8 @@
 ### 2.1 方法一:哈希表（Set）
 
 > 使用哈希表来进行，遍历数组，询问哈希表是否存在num元素，如果存在返回重复数字num，否则将num加入到哈希表中
+>
+> 可以使用标记数组来直接进行，可减少set的查找的时间。
 
 #### 代码实现
 
@@ -36,6 +38,21 @@
      }
      return -1;
  }
+ 
+/**
+ * 标记数组
+ */
+ public int findRepeatNumber2(int[] nums) {
+    boolean[] flag = new boolean[nums.length];
+    for (int num : nums) {
+        if (flag[num]) {
+            return num;
+        } else {
+            flag[num] = true;
+        }
+    }
+    return -1;
+}
 ```
 
 #### 复杂度分析
@@ -86,7 +103,39 @@
 >
 > 空间复杂度：O\(1\) 原地算法。
 
-### 2.3 方法三：排序
+### 2.3 方法三:数组\*
+
+> 通过对遍历的数对应下标的数进行-n，操作，当访问到的数对应下标为负数时，则表示出现重复的数
+
+#### 代码实现
+
+```text
+/**
+ * 对数对应坐标对数进行-n处理
+ */
+public int findRepeatNumber5(int[] nums) {
+    int n = nums.length;
+    for (int i = 0; i < n; i++) {
+        int k = nums[i];
+        if (k < 0) {
+            k += n;
+        }
+        if (nums[k] < 0) {
+            return k;
+        }
+        nums[k] -= n;
+    }
+    return -1;
+}
+```
+
+#### 复杂度分析
+
+> 时间复杂度：O\(n\) 遍历整个数组
+>
+> 空间复杂度：O\(1\) 原地算法。
+
+### 2.4 方法四:排序
 
 > 排序，比较相邻的元素是否相等
 

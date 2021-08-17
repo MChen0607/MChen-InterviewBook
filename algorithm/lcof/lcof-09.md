@@ -1,4 +1,4 @@
-# 09. 用两个栈实现队列【设计、栈】
+# 09. 用两个栈实现队列【栈】
 
 ## 1.题目描述
 
@@ -29,32 +29,32 @@
 ### 2.1 Stack
 
 ```text
- class CQueue {
-     Stack<Integer> stacka;
-     Stack<Integer> stackb;
-     public CQueue() {
-         stacka=new Stack<>();
-         stackb=new Stack<>();
-     }
-     
-     public void appendTail(int value) {
-         stacka.push(value);
-     }
-     
-     public int deleteHead() {
-         if(stackb.empty()){
-             while(!stacka.empty()){
-                 stackb.push(stacka.pop());
-             }
-         }
-         if(!stackb.empty()){
-             return stackb.pop();
-         }else{
-             return -1;
-         }
-        
-     }
- }
+class CQueue {
+    Stack<Integer> stackA;
+    Stack<Integer> stackB;
+
+    public CQueue() {
+        stackA = new Stack<>();
+        stackB = new Stack<>();
+    }
+
+    public void appendTail(int value) {
+        stackA.push(value);
+    }
+
+    public int deleteHead() {
+        if (stackB.empty()) {
+            while (!stackA.empty()) {
+                stackB.push(stackA.pop());
+            }
+        }
+        if (!stackB.empty()) {
+            return stackB.pop();
+        } else {
+            return -1;
+        }
+    }
+}
 ```
 
 ### 2.2 双端队列Deque
@@ -62,32 +62,33 @@
 > 实现栈的功能
 
 ```text
- class CQueue {
-     Deque<Integer> stacka;
-     Deque<Integer> stackb;
-     public CQueue() {
-         stacka=new LinkedList<>();
-         stackb=new LinkedList<>();
-     }
-     
-     public void appendTail(int value) {
-         stacka.push(value);
-     }
-     
-     public int deleteHead() {
-         if(stackb.isEmpty()){
-             while(!stacka.isEmpty()){
-                 stackb.push(stacka.pop());
-             }
-         }
-         if(!stackb.isEmpty()){
-             return stackb.pop();
-         }else{
-             return -1;
-         }
-        
-     }
- }
+class CQueue2 {
+    Deque<Integer> stackA;
+    Deque<Integer> stackB;
+
+    public CQueue2() {
+        stackA = new LinkedList<>();
+        stackB = new LinkedList<>();
+    }
+
+    public void appendTail(int value) {
+        stackA.addLast(value);
+    }
+
+    public int deleteHead() {
+        if (stackB.isEmpty()) {
+            while (!stackA.isEmpty()) {
+                stackB.addLast(stackA.removeLast());
+            }
+        }
+        if (!stackB.isEmpty()) {
+            return stackB.removeLast();
+        } else {
+            return -1;
+        }
+
+    }
+}
 ```
 
 #### 复杂度分析

@@ -1,4 +1,4 @@
-# 06. 从尾到头打印链表【递归、辅助空间、辅助栈】
+# 06. 从尾到头打印链表【递归/辅助栈】
 
 ## 1.题目描述
 
@@ -22,18 +22,18 @@
 
 ```text
  public int[] reversePrint(ListNode head) {
-             ArrayList<Integer> tmp = new ArrayList<Integer>();
-             recur(head,tmp);
-             int[] res = new int[tmp.size()];
-             for(int i = 0; i < res.length; i++)
-                 res[i] = tmp.get(i);
-             return res;
-         }
-         void recur(ListNode head,ArrayList<Integer> tmp) {
-             if(head == null) return;
-             recur(head.next,tmp);
-             tmp.add(head.val);
-         }
+     ArrayList<Integer> tmp = new ArrayList<Integer>();
+     recur(head,tmp);
+     int[] res = new int[tmp.size()];
+     for(int i = 0; i < res.length; i++)
+         res[i] = tmp.get(i);
+     return res;
+ }
+ void recur(ListNode head,ArrayList<Integer> tmp) {
+     if(head == null) return;
+     recur(head.next,tmp);
+     tmp.add(head.val);
+ }
 ```
 
 #### 复杂度分析

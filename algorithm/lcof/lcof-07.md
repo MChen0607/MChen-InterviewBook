@@ -39,27 +39,34 @@
 #### 代码实现
 
 ```text
- public TreeNode buildTree(int[] preorder, int[] inorder) {
-     int preleft = 0, preright = preorder.length - 1;
-     int inleft = 0, inright = inorder.length - 1;
-     return createTree(preorder, inorder, preleft, preright, inleft, inright);
- }
- ​
- TreeNode createTree(int[] preorder, int[] inorder, int preleft, int preright, int inleft, int inright) {
-     if (preleft > preright || inleft > inright) {
-         return null;
-     }
-     TreeNode root = new TreeNode(preorder[preleft]);
-     int inIndex = inleft;
-     for (int i = inleft; i <= inright; i++) {
-         if (inorder[i] == preorder[preleft]) {
-             inIndex = i;
-         }
-     }
-     root.left = createTree(preorder, inorder, preleft + 1, preleft + inIndex - inleft, inleft, inIndex - 1);
-     root.right = createTree(preorder, inorder, preleft + inIndex - inleft + 1, preright, inIndex + 1, inright);
-     return root;
- }
+/**
+ * 递归
+ * @param preorder 前序
+ * @param inorder  中序
+ * @return 二叉树
+ */
+public TreeNode buildTree(int[] preorder, int[] inorder) {
+    int preLeft = 0, preRight = preorder.length - 1;
+    int inLeft = 0, inRight = inorder.length - 1;
+    return createTree(preorder, inorder, preLeft, preRight, inLeft, inRight);
+}
+
+
+TreeNode createTree(int[] preorder, int[] inorder, int preLeft, int preRight, int inLeft, int inRight) {
+    if (preLeft > preRight || inLeft > inRight) {
+        return null;
+    }
+    TreeNode root = new TreeNode(preorder[preLeft]);
+    int inIndex = inLeft; // 找到root结点在中序中的下标位置
+    for (int i = inLeft; i <= inRight; i++) {
+        if (inorder[i] == preorder[preLeft]) {
+            inIndex = i;
+        }
+    }
+    root.left = createTree(preorder, inorder, preLeft + 1, preLeft + inIndex - inLeft, inLeft, inIndex - 1);
+    root.right = createTree(preorder, inorder, preLeft + inIndex - inLeft + 1, preRight, inIndex + 1, inRight);
+    return root;
+}
 ```
 
 #### 复杂度分析
@@ -75,35 +82,37 @@
 #### 代码实现
 
 ```text
- Map<Integer,Integer> map=new HashMap<>();
- public TreeNode buildTree2(int[] preorder, int[] inorder) {
-     int preleft = 0, preright = preorder.length - 1;
-     int inleft = 0, inright = inorder.length - 1;
-     for(int i=0;i<inorder.length;i++){
-         map.put(inorder[i],i);
-     }
-     return createTree2(preorder, inorder, preleft, preright, inleft, inright);
- }
- TreeNode createTree2(int[] preorder, int[] inorder, int preleft, int preright, int inleft, int inright) {
-     if (preleft > preright || inleft > inright) {
-         return null;
-     }
-     TreeNode root = new TreeNode(preorder[preleft]);
-     int inIndex=map.get(preorder[preleft]);//优化查找方式。
-     root.left = createTree(preorder, inorder, preleft + 1, preleft + inIndex - inleft, inleft, inIndex - 1);
-     root.right = createTree(preorder, inorder, preleft + inIndex - inleft + 1, preright, inIndex + 1, inright);
-     return root;
- }
- 
+/**
+ * 递归优化
+ */
+Map<Integer,Integer> map=new HashMap<>();
+public TreeNode buildTree2(int[] preorder, int[] inorder) {
+    int preLeft = 0, preRight = preorder.length - 1;
+    int inLeft = 0, inRight = inorder.length - 1;
+    for(int i=0;i<inorder.length;i++){
+        map.put(inorder[i],i);
+    }
+    return createTree2(preorder, inorder, preLeft, preRight, inLeft, inRight);
+}
+TreeNode createTree2(int[] preorder, int[] inorder, int preLeft, int preRight, int inLeft, int inRight) {
+    if (preLeft > preRight || inLeft > inRight) {
+        return null;
+    }
+    TreeNode root = new TreeNode(preorder[preLeft]);
+    int inIndex=map.get(preorder[preLeft]);//优化查找方式。
+    root.left = createTree(preorder, inorder, preLeft + 1, preLeft + inIndex - inLeft, inLeft, inIndex - 1);
+    root.right = createTree(preorder, inorder, preLeft + inIndex - inLeft + 1, preRight, inIndex + 1, inRight);
+    return root;
+}
 ```
 
 #### 复杂度分析
 
 > 时间复杂度：O\(n\)
 >
-> 空间复杂度：O\(n\) 递归调用为O\(h\),h为二叉树的高度、返回结果O\(n\).因为h&lt;n，所以总的空间复杂度为O\(n\).
+> 空间复杂度：O\(n\)
 
-### 2.3 方法三：迭代
+### 2.3 \*方法三：迭代
 
 > 我们用一个栈和一个指针辅助进行二叉树的构造。初始时栈中存放了根节点（前序遍历的第一个节点），指针指向中序遍历的第一个节点；我们依次枚举前序遍历中除了第一个节点以外的每个节点。如果 index 恰好指向栈顶节点， 那么我们不断地弹出栈顶节点并向右移动 index，并将当前节点作为最后一个弹出的节点的右儿子； 如果 index 和栈顶节点不同，我们将当前节点作为栈顶节点的左儿子； 无论是哪一种情况，我们最后都将当前的节点入栈。
 
