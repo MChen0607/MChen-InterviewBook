@@ -16,8 +16,6 @@
 
 > 1 &lt;= n,m &lt;= 100 0 &lt;= k &lt;= 20
 
-&lt;!--more--&gt;
-
 ## 2.解题思路
 
 ### 2.1 方法一：DFS
@@ -25,45 +23,48 @@
 > 本题思路和[剑指offer 12.矩阵的路径](lcof-12.md)是一样的，采用深度优先搜索策略。
 >
 > 只是在剪枝判断过程时，增加结点的数位之后是否小于K\(18\)。其他思路大致相同。
+>
+> 本题机器人走两个方向，一个是向右，一个向下即可。
 
 ### 代码实现
 
 ```text
- static class Solution13 {
-     public int movingCount(int m, int n, int k) {
-         if (m == 0 || n == 0) {
-             return 0;
-         }
-         boolean[][] visited = new boolean[m][n];
-         int count = dfs(m, n, k, 0, 0, visited);
-         return count;
-     }
- ​
-     private int dfs(int m, int n, int k, int indexI, int indexJ, boolean[][] visited) {
-         int count=0;
-         if(indexI>=0&&indexI<m&&indexJ>=0&&indexJ<n&&!visited[indexI][indexJ]&&getSum(indexI)+getSum(indexJ)<=k){//indexI、indexJ一定是 >=0的,剪枝。
-             visited[indexI][indexJ]=true;
-             count=1+dfs(m,n,k,indexI+1,indexJ,visited)+dfs(m,n,k,indexI,indexJ+1,visited);
-         }
-         return count;
-     }
- ​
-     private int getSum(int n) {
-         int sum=0;
-         while(n!=0){
-             sum+=n%10;
-             n=n/10;
-         }
-         return sum;
-     }
- }
+/**
+ * DFS
+ */
+public int movingCount(int m, int n, int k) {
+    if (m == 0 || n == 0) {
+        return 0;
+    }
+    boolean[][] visited = new boolean[m][n];
+    return dfs(m, n, k, 0, 0, visited);
+}
+
+private int dfs(int m, int n, int k, int indexI, int indexJ, boolean[][] visited) {
+    int count = 0;
+    if (indexI >= 0 && indexI < m && indexJ >= 0 && indexJ < n
+            && !visited[indexI][indexJ] && getSum(indexI) + getSum(indexJ) <= k) { //indexI、indexJ一定是 >=0的,剪枝。
+        visited[indexI][indexJ] = true;
+        count = 1 + dfs(m, n, k, indexI + 1, indexJ, visited) + dfs(m, n, k, indexI, indexJ + 1, visited);
+    }
+    return count;
+}
+
+private int getSum(int n) {
+    int sum = 0;
+    while (n != 0) {
+        sum += n % 10;
+        n = n / 10;
+    }
+    return sum;
+}
 ```
 
 ### 复杂度分析
 
 > 时间复杂度：O\(MN\)
 >
-> 空间复杂度：O\(MN\)s
+> 空间复杂度：O\(MN\)
 
 ## 3.参考
 

@@ -29,15 +29,18 @@
 #### 代码实现
 
 ```text
- public int hammingWeight(int n) {
-     int res=0;
-     while(n!=0){
-         if((n&1)==1)
-             res++;
-         n >>>= 1;
-     }
-     return res;
- }
+/**
+ * 暴力法
+ */
+public int hammingWeight(int n) {
+    int res = 0;
+    while (n != 0) {
+        if ((n & 1) == 1)
+            res++;
+        n >>>= 1;
+    }
+    return res;
+}
 ```
 
 #### 复杂度分析
@@ -53,19 +56,22 @@
 #### 代码实现
 
 ```text
- public int hammingWeight1(int n) {
-     int res=0;
-     while(n!=0){
-         res++;
-         n=n&(n-1);
-     }
-     return res;
- }
+/**
+ * 位运算
+ */
+public int hammingWeight1(int n) {
+    int res = 0;
+    while (n != 0) {
+        res++;
+        n = n & (n - 1);
+    }
+    return res;
+}
 ```
 
 #### 复杂度分析
 
-> 时间复杂度：O\(m\) m《 32
+> 时间复杂度：O\(m\)   m&lt;=32
 >
 > 空间复杂度：O\(1\)
 

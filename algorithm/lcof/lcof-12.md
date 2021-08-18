@@ -1,4 +1,4 @@
-# 12. 矩阵中的路径【DFS】
+# 12. 矩阵中的路径【DFS+回溯】
 
 ## 1.题目描述
 
@@ -33,59 +33,60 @@
 #### 代码
 
 ```text
- static class Solution12 {
-     int x[] = new int[]{0, 1, 0, -1};
-     int y[] = new int[]{1, 0, -1, 0};
- ​
-     public boolean exist(char[][] board, String word) {
-         if (board.length == 0 || board[0].length == 0) {
-             return false;
-         }
-         char[] arrayWord = word.toCharArray();
-         int m = board.length;
-         int n = board[0].length;
-         boolean[][] visited = new boolean[m][n];
-         for (int i = 0; i < m; i++) {
-             for (int j = 0; j < n; j++) {
-                 if (board[i][j] == arrayWord[0]) {
-                     visited[i][j] = true;
-                     if (dfs(board, arrayWord, i, j, m, n, 1, visited)) {
-                         return true;
-                     }
-                     visited[i][j] = false;
-                 }
-             }
-         }
-         return false;
-     }
- ​
-     private boolean dfs(char[][] board, char[] arrayWord, int i, int j, int m, int n, int index, boolean[][] visited) {
-         if (index == arrayWord.length) {
-             return true;
-         }
-         int indexI = i, indexY = j;
-         boolean findPath = false;
-         for (int k = 0; k < 4; k++) {
-             indexI = i + x[k];
-             indexY = j + y[k];
-             if (indexI >= 0 && indexI < m && indexY >= 0 && indexY < n && !visited[indexI][indexY] && board[indexI][indexY] == arrayWord[index]) {//剪枝
-                 visited[indexI][indexY] = true;
-                 findPath = dfs(board, arrayWord, indexI, indexY, m, n, index + 1, visited);
-                 if (findPath) {
-                     return true;
-                 } else {
-                     visited[indexI][indexY] = false;
-                 }
-             }
-         }
-         return findPath;
-     }
- }
+/**
+ * DFS
+ */
+public boolean exist(char[][] board, String word) {
+    if (board.length == 0 || board[0].length == 0) {
+        return false;
+    }
+    char[] arrayWord = word.toCharArray();
+    int m = board.length;
+    int n = board[0].length; // m行n列
+    boolean[][] visited = new boolean[m][n];
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            if (board[i][j] == arrayWord[0]) {
+                visited[i][j] = true;
+                if (dfs(board, arrayWord, i, j, m, n, 1, visited)) {
+                    return true;
+                }
+                visited[i][j] = false;
+            }
+        }
+    }
+    return false;
+}
+
+int[] x = new int[]{0, 1, 0, -1};
+int[] y = new int[]{1, 0, -1, 0};
+
+private boolean dfs(char[][] board, char[] arrayWord, int i, int j, int m, int n, int index, boolean[][] visited) {
+    if (index == arrayWord.length) {
+        return true;
+    }
+    int indexI = i, indexY = j;
+    boolean findPath = false;
+    for (int k = 0; k < 4; k++) {
+        indexI = i + x[k];
+        indexY = j + y[k];
+        if (indexI >= 0 && indexI < m && indexY >= 0 && indexY < n && !visited[indexI][indexY] && board[indexI][indexY] == arrayWord[index]) {//剪枝
+            visited[indexI][indexY] = true;
+            findPath = dfs(board, arrayWord, indexI, indexY, m, n, index + 1, visited);
+            if (findPath) {
+                return true;
+            } else {
+                visited[indexI][indexY] = false;
+            }
+        }
+    }
+    return false;
+}
 ```
 
 #### 复杂度分析
 
-> 注：复杂度分析参考官方题解。
+> 注：复杂度分析参考**官方题解**。
 
 > 时间复杂度：O\(3^{length} MN\) ，length为查找字符串长度。
 >

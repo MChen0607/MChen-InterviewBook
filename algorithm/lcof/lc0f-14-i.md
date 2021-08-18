@@ -22,27 +22,28 @@
 
 > 通过数学公式求导推理可以得出，在分段的过程中，尽可能让每段都为3的情况下，乘积是最大的。
 >
-> 具体证明过程见资源链接。
+> 具体证明过程见参考链接。
 
 #### 代码实现
 
 ```text
- static class Solution14_1 {
-     public int cuttingRope(int n) {
-         if(n<2){
-             return 0;
-         }
-         if(n<=3){
-             return n-1;
-         }
-         int times=n/3;
-         if(n-times*3==1){//当分完数为3的times段后，还剩1时，会发现 1 3的乘积小于2 2的乘积，所以此情况需要减少一次分为3的段。
-             times--;
-         }
-         int mod=(n-times*3)/2;//当余数为0时 乘以1;余数为4时,乘以4;余数为2时乘以2.可转换为取2的（余数除以2）次方。
-         return (int)Math.pow(3,times)*(int)Math.pow(2,mod);
-     }
- }
+/**
+ * 数学
+ */
+public int cuttingRope(int n) {
+    if (n < 2) {
+        return 0;
+    }
+    if (n <= 3) {
+        return n - 1;
+    }
+    int times = n / 3;
+    if (n - times * 3 == 1) {//当分完数为3的times段后，还剩1时，会发现 1 3的乘积小于2 2的乘积，所以此情况需要减少一次分为3的段。
+        times--;
+    }
+    int mod = (n - times * 3) / 2;//当余数为0时 乘以1;余数为4时,乘以4;余数为2时乘以2.可转换为取2的（余数除以2）次方。
+    return (int) Math.pow(3, times) * (int) Math.pow(2, mod);
+}
 ```
 
 #### 复杂性分析

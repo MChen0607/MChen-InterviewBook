@@ -13,36 +13,34 @@
 #### 代码
 
 ```text
- static class Solution20 {
-     public boolean isNumber(String s) {
-         if (s.length() == 0) {
-             return false;
-         }
-         s = s.trim();//先去除字符串前后的空格
-         boolean numFlag = false;
-         boolean opsFlag = false;
-         boolean eFlag = false;
-         boolean dotFlag = false;
-         for (int i = 0; i < s.length(); i++) {
-             char c = s.charAt(i);
-             if (c >= '0' && c <= '9') {
-                 numFlag = true;
-             } else if (c == '.' && !eFlag && !dotFlag) {//e后面不能有'.'
-                 dotFlag = true;
-             } else if ((c == '+' || c == '-') && !opsFlag && (i == 0 || s.charAt(i - 1) == 'e' || s.charAt(i - 1) == 'E')) {
-                 //只能有一个'+'/'-';获取前一个字符为'e'/'E';
-                 opsFlag = true;
-             } else if ((c == 'e' || c == 'E') && !eFlag && numFlag) {//e前面至少要有一个数组出现。
-                 eFlag = true;// 合格的数字只能有一个e
-                 opsFlag = false;// 允许e后面有一个'+'/'-'
-                 numFlag = false;// e后面一定要有 数字
-             } else {//其他情况都为非法数字形式。
-                 return false;
-             }
-         }
-         return numFlag;
-     }
- }
+public boolean isNumber(String s) {
+    if (s.length() == 0) {
+        return false;
+    }
+    s = s.trim();//先去除字符串前后的空格
+    boolean numFlag = false;
+    boolean opsFlag = false;
+    boolean eFlag = false;
+    boolean dotFlag = false;
+    for (int i = 0; i < s.length(); i++) {
+        char c = s.charAt(i);
+        if (c >= '0' && c <= '9') {
+            numFlag = true;
+        } else if (c == '.' && !eFlag && !dotFlag) {//e后面不能有'.'
+            dotFlag = true;
+        } else if ((c == '+' || c == '-') && !opsFlag && (i == 0 || s.charAt(i - 1) == 'e' || s.charAt(i - 1) == 'E')) {
+            //只能有一个'+'/'-';获取前一个字符为'e'/'E';
+            opsFlag = true;
+        } else if ((c == 'e' || c == 'E') && !eFlag && numFlag) {//e前面至少要有一个数组出现。
+            eFlag = true;// 合格的数字只能有一个e
+            opsFlag = false;// 允许e后面有一个'+'/'-'
+            numFlag = false;// e后面一定要有 数字
+        } else {//其他情况都为非法数字形式。
+            return false;
+        }
+    }
+    return numFlag;
+}
 ```
 
 #### 复杂度分析

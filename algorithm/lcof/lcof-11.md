@@ -23,17 +23,23 @@
 #### 代码实现
 
 ```text
- public int minArray(int[] numbers) {
-     if(numbers==null){
-         return -1;
-     }
-     for(int i=1;i<numbers.length;i++){
-         if(numbers[i]<numbers[i-1]){
-             return numbers[i];
-         }
-     }
-     return numbers[0];
- }
+/**
+ * 查找是否有出现断层现象
+ *
+ * @param numbers 旋转数组
+ * @return 最小的数字
+ */
+public int minArray(int[] numbers) {
+    if (numbers == null) {
+        return -1;
+    }
+    for (int i = 1; i < numbers.length; i++) {
+        if (numbers[i] < numbers[i - 1]) {
+            return numbers[i];
+        }
+    }
+    return numbers[0];
+}
 ```
 
 #### 复杂度分析
@@ -55,25 +61,54 @@
 #### 代码实现
 
 ```text
- public int minArray2(int[] numbers) {
-     int left=0,right=numbers.length-1;
-     while(left<right){
-         int mid=left+(right-left)/2;
-         if(numbers[mid]<numbers[right]){
-             right=mid;
-         }else if(numbers[mid]>numbers[right]){
-             left=mid+1;
-         }else{
-             right-=1;
-         }
-     }
-     return numbers[left];
- }
+/**
+ * 二分查找
+ */
+public int minArray2(int[] numbers) {
+    int left = 0, right = numbers.length - 1;
+    while (left < right) {
+        int mid = left + (right - left) / 2;
+        if (numbers[mid] < numbers[right]) {
+            right = mid;
+        } else if (numbers[mid] > numbers[right]) {
+            left = mid + 1;
+        } else {
+            right -= 1;
+        }
+    }
+    return numbers[left];
+}
+
+
+/**
+ * 二分查找优化
+ * 当nums[mid]=nums[right],可能会出现此时left～mid~right全都相等，所以可以直接线性查找
+ */
+public int minArray3(int[] numbers) {
+    int left = 0, right = numbers.length - 1;
+    while (left < right) {
+        int mid = left + (right - left) / 2;
+        if (numbers[mid] < numbers[right]) {
+            right = mid;
+        } else if (numbers[mid] > numbers[right]) {
+            left = mid + 1;
+        } else {
+            int index = left;
+            for (int i = left + 1; i < right; i++) {
+                if (numbers[i] < numbers[index]) {
+                    index = i;
+                }
+            }
+            return numbers[index];
+        }
+    }
+    return numbers[left];
+}
 ```
 
 #### 复杂度分析
 
-> 时间复杂度：O\(log n\)
+> 时间复杂度：O\(log n\) // 当所有数都相等时，会退化为O\(n\)。
 >
 > 空间复杂度：O\(1\)
 

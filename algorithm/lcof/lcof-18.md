@@ -1,4 +1,4 @@
-# 18. 删除链表的节点【快慢指针】
+# 18. 删除链表的节点【双指针】
 
 ## 1.题目描述
 
@@ -20,38 +20,39 @@
 
 ## 2.解题思路
 
-### 2.1 方法一：双指针\[快慢指针\]
+### 2.1 方法一：双指针\[前现指针\]
 
 > 使用双指针的方式，cur指向当前结点，pre指向当前结点的前一个结点，一次遍历链表即可。
 
 #### 代码
 
 ```text
- class Solution {
-     public ListNode deleteNode(ListNode head, int val) {
-         // 如果链表为空，则直接返回null结点。
-         if(head==null){
-             return null;
-         }
-         // 如果要删除的结点就是头结点，可直接返回头结点的next指针。
-         if(head.val==val){
-             return head.next;
-         }
-         // 如果不为以上两种情况，则使用双指针的方式进行对链表的删除结点任务
-         // pre记为要删除结点的前一个指针，cur为当前遍历的指针。
-         // 循环遍历直到cur为null.
-         ListNode pre=head,cur=head.next;
-         while(cur!=null){
-             if(cur.val==val){// 如果找到要删除的结点，则将当前的next指针赋值给pre的next指针，完成删除工作。
-                 pre.next=cur.next;
-                 return head;
-             }
-             pre=cur;
-             cur=cur.next;
-         }
-         return head;//如果没找要删除的结点，则返回head结点即可。
-     }
- }
+/**
+ * 双指针
+ */
+public ListNode deleteNode(ListNode head, int val) {
+    // 如果链表为空，则直接返回null结点。
+    if (head == null) {
+        return null;
+    }
+    // 如果要删除的结点就是头结点，可直接返回头结点的next指针。
+    if (head.val == val) {
+        return head.next;
+    }
+    // 如果不为以上两种情况，则使用双指针的方式进行对链表的删除结点任务
+    // pre记为要删除结点的前一个指针，cur为当前遍历的指针。
+    // 循环遍历直到cur为null.
+    ListNode pre = head, cur = head.next;
+    while (cur != null) {
+        if (cur.val == val) {// 如果找到要删除的结点，则将当前的next指针赋值给pre的next指针，完成删除工作。
+            pre.next = cur.next;
+            return head;
+        }
+        pre = cur;
+        cur = cur.next;
+    }
+    return head;//如果没找要删除的结点，则返回head结点即可。
+}
 ```
 
 #### 复杂度分析
