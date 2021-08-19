@@ -38,31 +38,33 @@
 ```
 
 ```text
- // 假设此方法 k 是任意数
- // 先计算链表长度，判断k是否有效
- public ListNode getKthFromEnd2(ListNode head, int k) {
-     if (k < 1) { //本题从1开始
-         return null;
-     }
-     int len = 0;
-     ListNode dummyHead = head;
-     while (dummyHead != null) {//计算链表的长度
-         len++;
-         dummyHead = dummyHead.next;
-     }
-     if (k < 1 || k > len) { //k超出1~len的范围为无效范围
-         return null;
-     }
-     ListNode post = head, cur = head;
-     for (int i = 0; i < k; i++) {
-         post = post.next;
-     }
-     while (post != null) {
-         cur = cur.next;
-         post = post.next;
-     }
-     return cur;
- }
+/**
+ * 假设此方法 k 是任意数
+ * 先计算链表长度，判断k是否有效
+ */
+public ListNode getKthFromEnd2(ListNode head, int k) {
+    if (k < 1) { //本题从1开始
+        return null;
+    }
+    int len = 0;
+    ListNode dummyHead = head;
+    while (dummyHead != null) {//计算链表的长度
+        len++;
+        dummyHead = dummyHead.next;
+    }
+    if (k > len) { //k超出1~len的范围为无效范围
+        return null;
+    }
+    ListNode post = head, cur = head;
+    for (int i = 0; i < k; i++) {
+        post = post.next;
+    }
+    while (post != null) {
+        cur = cur.next;
+        post = post.next;
+    }
+    return cur;
+}
 ```
 
 #### 复杂度分析

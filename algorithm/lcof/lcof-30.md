@@ -30,71 +30,69 @@
 #### 代码实现
 
 ```text
- class MinStack {
-     Stack<Integer> stack;
-     Stack<Integer> min;
-     /** initialize your data structure here. */
-     public MinStack() {
-         stack=new Stack<>();// 数据栈
-         min=new Stack<>();  // 最小数栈
-     }
-     
-     // 添加数据x，如果当前栈为空，则当前添加的数x自然就为最小的数。如果栈不为空，则需要判断当前最小数栈的栈顶元素是否小于x，如果小于x，则继续添加栈顶元素。如果是大于等于x，则需要将x添加到最小数栈中。
-     public void push1(int x) {
-         if(stack.empty()||x<=min.peek()){
-             stack.push(x);
-             min.push(x);
-         }else{
-             stack.push(x);
-             min.push(min.peek());
-         }
-     }
-     // 优化push函数。如果添加数x小于等于最小数栈的栈顶元素，则添加x到最小数栈中，否则不进行操作。节省空间。
-     public void push(int x) {
-         stack.push(x);
-         if(min.empty()||x<=min.peek()){
-             min.push(x);
-         }
-     }
-     
-     // 优化pop函数，如果数据栈的栈顶元素等于最小数栈的栈顶元素，则最小数栈的栈顶元素才需要移除。
-     public void pop() {
-         if(stack.pop().equals(min.peek())){
-             min.pop();
-         }
-     }
-   
-     // 移除两个栈的栈顶元素
-     public void pop1() {
-         if(!stack.isEmpty()){
-             stack.pop();
-             min.pop();
-         }
-     }
-     
-     // 返回栈顶元素
-     public int top() {
-         return stack.peek();
-     }
-     
-     // 如果最小数栈不为空，则返回最小数栈的栈顶元素；否则返回Integer的最小数。
-     public int min() {
-         if(min.empty()){
-             return Integer.MIN_VALUE;
-         }else{
-             return min.peek();
-         }
-     }
- }
- ​
- /**
-  * Your MinStack object will be instantiated and called as such:
-  * MinStack obj = new MinStack();
-  * obj.push(x);
-  * obj.pop();
-  * int param_3 = obj.top();
-  * int param_4 = obj.min();
-  */
+/**
+ * 两个栈
+ */
+class MinStack {
+    Stack<Integer> stack;
+    Stack<Integer> min;
+
+    /**
+     * initialize your data structure here.
+     */
+    public MinStack() {
+        stack = new Stack<>();// 数据栈
+        min = new Stack<>();  // 最小数栈
+    }
+
+    // 添加数据x，如果当前栈为空，则当前添加的数x自然就为最小的数。如果栈不为空，则需要判断当前最小数栈的栈顶元素是否小于x，如果小于x，则继续添加栈顶元素。如果是大于等于x，则需要将x添加到最小数栈中。
+    public void push1(int x) {
+        if (stack.empty() || x <= min.peek()) {
+            stack.push(x);
+            min.push(x);
+        } else {
+            stack.push(x);
+            min.push(min.peek());
+        }
+    }
+
+    // 优化push函数。如果添加数x小于等于最小数栈的栈顶元素，则添加x到最小数栈中，否则不进行操作。节省空间。
+    public void push(int x) {
+        stack.push(x);
+        if (min.empty() || x <= min.peek()) {
+            min.push(x);
+        }
+    }
+
+    // 优化pop函数，如果数据栈的栈顶元素等于最小数栈的栈顶元素，则最小数栈的栈顶元素才需要移除。
+    public void pop() {
+        if (stack.pop().equals(min.peek())) {
+            min.pop();
+        }
+    }
+
+    // 移除两个栈的栈顶元素
+    public void pop1() {
+        if (!stack.isEmpty()) {
+            stack.pop();
+            min.pop();
+        }
+    }
+
+    // 返回栈顶元素
+    public int top() {
+        return stack.peek();
+    }
+
+    // 如果最小数栈不为空，则返回最小数栈的栈顶元素；否则返回Integer的最小数。
+    public int min() {
+        if (min.empty()) {
+            return Integer.MIN_VALUE;
+        } else {
+            return min.peek();
+        }
+    }
+}
 ```
 
 ### 2.2 方法二：头插法链表

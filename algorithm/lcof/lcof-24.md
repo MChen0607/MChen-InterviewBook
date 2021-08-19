@@ -1,4 +1,4 @@
-# 24. 反转链表【递归、迭代】
+# 24. 反转链表【递归/迭代】
 
 ## 1.题目描述
 
@@ -16,8 +16,6 @@
 ```text
  0 <= 节点个数 <= 5000
 ```
-
-&lt;!--more--&gt;
 
 ## 2.解题思路
 
@@ -41,20 +39,35 @@
  }
 ```
 
+> 不需要创建伪结点，直接通过双指针的方法来进行。
+
+```text
+public ListNode reverseList3(ListNode head) {
+        ListNode cur = head, pre = null;
+        while (cur != null) {
+            ListNode tmp = cur.next; // 暂存后继节点 cur.next
+            cur.next = pre;          // 修改 next 引用指向
+            pre = cur;               // pre 暂存 cur
+            cur = tmp;               // cur 访问下一节点
+        }
+        return pre;
+    }
+```
+
 #### 复杂度分析
 
 > 时间复杂度：O\(n\)
 >
 > 空间复杂度：O\(1\)
 
-### 2.2 方法二：递归
+### 2.2 方法二\*：递归
 
 > 递归调用，修改结点的指针转向。
 
 #### 代码实现
 
 ```text
- public ListNode reverseList2(ListNode head) {
+ public ListNode reverseL ist2(ListNode head) {
      if (head == null||head.next==null) {
          return head;
      }
@@ -63,6 +76,23 @@
      head.next=null;
      return newHead;
  }
+```
+
+> 定义函数形式递归
+
+```text
+public ListNode reverseList4(ListNode head) {
+    return recur(head, null);
+}
+
+private ListNode recur(ListNode cur, ListNode pre) {
+    if (cur == null) {
+        return pre;
+    }
+    ListNode res = recur(cur.next, cur);
+    cur.next = pre;
+    return res;
+}
 ```
 
 #### 复杂度分析
@@ -75,4 +105,5 @@
 
 * [https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/](https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/)
 * [https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/solution/fan-zhuan-lian-biao-by-leetcode-solution-jvs5/](https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/solution/fan-zhuan-lian-biao-by-leetcode-solution-jvs5/)
+* [https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/solution/jian-zhi-offer-24-fan-zhuan-lian-biao-die-dai-di-2/](https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/solution/jian-zhi-offer-24-fan-zhuan-lian-biao-die-dai-di-2/)
 

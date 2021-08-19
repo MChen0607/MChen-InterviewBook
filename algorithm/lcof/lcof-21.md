@@ -17,8 +17,6 @@
 1. `0 <= nums.length <= 50000`
 2. `1 <= nums[i] <= 10000`
 
-&lt;!--more--&gt;
-
 ## 2.解题思路
 
 ### 2.1 方法一：双指针
@@ -30,31 +28,32 @@
 #### 代码实现
 
 ```text
- class Solution21 {
-     public int[] exchange(int[] nums) {
-         int len=nums.length;
-         if(len<2){
-             return nums;
-         }
-         int left=0,right=len-1;
-         while(left<right){
-             while(left<right&&(nums[left]&1)==1){//找到偶数
-                 left++;
-             }
-             while(right>left&&(nums[right]&1)==0){//找到奇数
-                 right--;
-             }
-             if(left<right){//交换位置
-                 int temp=nums[right];
-                 nums[right]=nums[left];
-                 nums[left]=temp;
-                 left++;
-                 right--;
-             }
-         }
-         return nums;
-     }
- }
+/**
+ * 双指针
+ */
+public int[] exchange(int[] nums) {
+    int len = nums.length;
+    if (len < 2) {
+        return nums;
+    }
+    int left = 0, right = len - 1;
+    while (left < right) {
+        while (left < right && (nums[left] & 1) == 1) { // 找到偶数
+            left++;
+        }
+        while (right > left && (nums[right] & 1) == 0) {// 找到奇数
+            right--;
+        }
+        if (left < right) { // 交换位置
+            int temp = nums[right];
+            nums[right] = nums[left];
+            nums[left] = temp;
+            left++;
+            right--;
+        }
+    }
+    return nums;
+}
 ```
 
 #### 复杂度分析

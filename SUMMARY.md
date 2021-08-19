@@ -5,7 +5,7 @@
 ## 数据结构与算法 <a id="algorithm"></a>
 
 * [面试题](algorithm/practice/README.md)
-  * [反转链表](algorithm/practice/fan-zhuan-lian-biao.md)
+  * [反转链表【递归/迭代】](algorithm/practice/fan-zhuan-lian-biao.md)
 * [剑指Offer](algorithm/lcof/README.md)
   * [03. 数组中重复的数字【排序/哈希表/数组交换】](algorithm/lcof/lcof-03.md)
   * [04. 二维数组中的查找【线性查找】](algorithm/lcof/lcof-04.md)
@@ -28,10 +28,10 @@
   * [20. 表示数值的字符串【字符串】](algorithm/lcof/lcof-20.md)
   * [21. 调整数组顺序使奇数位于偶数前面【双指针】](algorithm/lcof/lcof-21.md)
   * [22. 链表中倒数第k个节点【快慢指针】](algorithm/lcof/lcof-22.md)
-  * [24. 反转链表【递归、迭代】](algorithm/lcof/lcof-24.md)
-  * [25. 合并两个排序的链表【递归、迭代】](algorithm/lcof/lcof-25.md)
-  * [26. 树的子结构【迭代】](algorithm/lcof/lcof-26.md)
-  * [27. 二叉树的镜像【递归、迭代】](algorithm/lcof/lcof-27.md)
+  * [24. 反转链表【递归/迭代】](algorithm/lcof/lcof-24.md)
+  * [25. 合并两个排序的链表【迭代/递归】](algorithm/lcof/lcof-25.md)
+  * [26. 树的子结构【迭代/递归】](algorithm/lcof/lcof-26.md)
+  * [27. 二叉树的镜像【递归/迭代】](algorithm/lcof/lcof-27.md)
   * [28. 对称的二叉树【递归】](algorithm/lcof/lcof-28.md)
   * [29. 顺时针打印矩阵](algorithm/lcof/lcof-29.md)
   * [30. 包含min函数的栈](algorithm/lcof/lcof-30.md)

@@ -47,28 +47,28 @@
 #### 代码实现
 
 ```text
- class Solution28 {
-     public boolean isSymmetric(TreeNode root) {
-         if (root == null) {
-             return true;
-         }
-         return Symmetric(root.left, root.right);
-     }
- ​
-     public boolean Symmetric(TreeNode left, TreeNode right) {
-         if (left == null && right == null) {
-             return true;
-         }
-         if (left == null || right == null) {
-             return false;
-         }
-         if (left.val != right.val) {
-             return true;
-         }
-         return Symmetric(left.right, right.left) && Symmetric(left.left, right.right);
- ​
-     }
- }
+/**
+ * 递归
+ */
+public boolean isSymmetric(TreeNode root) {
+    if (root == null) {
+        return true;
+    }
+    return Symmetric(root.left, root.right);
+}
+
+public boolean Symmetric(TreeNode left, TreeNode right) {
+    if (left == null && right == null) {
+        return true;
+    }
+    if (left == null || right == null) {
+        return false;
+    }
+    if (left.val != right.val) {
+        return false;
+    }
+    return Symmetric(left.right, right.left) && Symmetric(left.left, right.right);
+}
 ```
 
 #### 复杂度分析

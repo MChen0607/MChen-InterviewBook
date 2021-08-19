@@ -1,4 +1,4 @@
-# 27. 二叉树的镜像【递归、迭代】
+# 27. 二叉树的镜像【递归/迭代】
 
 ## 1.题目描述
 
@@ -15,15 +15,7 @@
   
 ```
 
- `4`
-
- `/ \`
-
- `2 7`
-
- `/ \ / \`
-
- `1 3 6 9` 镜像输出：
+ 镜像输出：
 
 ```text
       4
@@ -73,26 +65,29 @@
 #### 代码实现
 
 ```text
- public TreeNode mirrorTree2(TreeNode root) {
-     if (root == null) {
-         return null;
-     }
-     Stack<TreeNode> stack = new Stack<>();
-     stack.add(root);
-     while (!stack.isEmpty()) {
-         TreeNode node = stack.pop();
-         if (node.left != null) {
-             stack.add(node.left);
-         }
-         if (node.right != null) {
-             stack.add(node.right);
-         }
-         TreeNode temp = node.left;
-         node.left = node.right;
-         node.right = temp;
-     }
-     return root;
- }
+/**
+ * 迭代 辅助栈/队列
+ */
+public TreeNode mirrorTree2(TreeNode root) {
+    if (root == null) {
+        return null;
+    }
+    Stack<TreeNode> stack = new Stack<>();
+    stack.add(root);
+    while (!stack.isEmpty()) {
+        TreeNode node = stack.pop();
+        if (node.left != null) {
+            stack.add(node.left);
+        }
+        if (node.right != null) {
+            stack.add(node.right);
+        }
+        TreeNode temp = node.left;
+        node.left = node.right;
+        node.right = temp;
+    }
+    return root;
+}
 ```
 
 #### 复杂度分析
