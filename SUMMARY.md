@@ -34,7 +34,7 @@
   * [27. 二叉树的镜像【递归/迭代】](algorithm/lcof/lcof-27.md)
   * [28. 对称的二叉树【递归】](algorithm/lcof/lcof-28.md)
   * [29. 顺时针打印矩阵](algorithm/lcof/lcof-29.md)
-  * [30. 包含min函数的栈](algorithm/lcof/lcof-30.md)
+  * [30. 包含min函数的栈【辅助栈/头插法链表】](algorithm/lcof/lcof-30.md)
   * [31. 栈的压入、弹出序列](algorithm/lcof/lcof-31.md)
   * [32 -Ⅰ 从上到下打印二叉树](algorithm/lcof/lcof-32-i.md)
   * [32 -Ⅱ 从上到下打印二叉树Ⅱ](algorithm/lcof/lcof-32-ii.md)
