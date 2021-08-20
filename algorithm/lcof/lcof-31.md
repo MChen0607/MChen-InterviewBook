@@ -37,21 +37,21 @@
 #### 代码实现
 
 ```text
- // 使用栈进行模拟
- class Solution31 {
-     public boolean validateStackSequences(int[] pushed, int[] popped) {
-         Stack<Integer> stack = new Stack<>();
-         int index = 0;
-         for (int i = 0; i < pushed.length; i++) {
-             stack.push(pushed[i]);
-             while (!stack.isEmpty() && stack.peek() == popped[index]) {
-                 stack.pop();
-                 index++;
-             }
-         }
-         return stack.isEmpty();
-     }
- }
+/**
+ * 辅助栈 模拟
+ */
+public boolean validateStackSequences(int[] pushed, int[] popped) {
+    Stack<Integer> stack = new Stack<>();
+    int index = 0;
+    for (int i = 0; i < pushed.length; i++) {
+        stack.push(pushed[i]);
+        while (!stack.isEmpty() && stack.peek() == popped[index]) {
+            stack.pop();
+            index++;
+        }
+    }
+    return stack.isEmpty();
+}
 ```
 
 #### 复杂度分析
@@ -67,20 +67,20 @@
 #### 代码实现
 
 ```text
- class Solution31 {
-     // 直接把pushed数值作为栈使用。
-     public boolean validateStackSequences1(int[] pushed, int[] popped) {
-         int top = -1, index = 0;
-         for (int i = 0; i < pushed.length; i++) {
-             pushed[++top] = pushed[i];
-             while (top != -1 && pushed[top] == popped[index]) {
-                 top--;
-                 index++;
-             }
-         }
-         return top == -1;
-     }
- }
+/**
+ * 将pushed数值作为栈使用
+ */
+public boolean validateStackSequences1(int[] pushed, int[] popped) {
+    int top = -1, index = 0;
+    for (int i = 0; i < pushed.length; i++) {
+        pushed[++top] = pushed[i];
+        while (top != -1 && pushed[top] == popped[index]) {
+            top--;
+            index++;
+        }
+    }
+    return top == -1;
+}
 ```
 
 ### 复杂度分析
