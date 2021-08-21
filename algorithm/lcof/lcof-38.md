@@ -1,4 +1,4 @@
-# 38. 字符串的排列
+# 38. 字符串的排列【回溯】
 
 ## 1.题目描述
 
@@ -13,8 +13,6 @@
  输出：["abc","acb","bac","bca","cab","cba"]
 ```
 
-&lt;!--more--&gt;
-
 ## 2.解题思路
 
 ### 2.1 方法一：回溯法
@@ -24,41 +22,72 @@
 #### 代码实现
 
 ```text
- public static class Solution {
- ​
-   List<String> res = new LinkedList<>();
-   char[] c;
- ​
-   public String[] permutation(String s) {
-     c = s.toCharArray();
-     dfs(0);
-     return res.toArray(new String[0]);
-   }
- ​
-   private void dfs(int index) {
-     if (index == c.length - 1) {
-       res.add(String.valueOf(c));
-       return;
-     }
-     Set<Character> set = new HashSet<>();
-     for (int i = index; i < c.length; i++) {
-       if (set.contains(c[i])) {
-         continue;
-       }
-       set.add(c[i]);
-       swap(i, index);
-       dfs(index + 1);
-       swap(i, index);//回溯操作
-     }
-   }
- ​
-   private void swap(int i, int index) {
-     char temp = c[i];
-     c[i] = c[index];
-     c[index] = temp;
-   }
- ​
- }
+/**
+ * 回溯
+ */
+List<String> res = new LinkedList<>();
+char[] c;
+
+public String[] permutation(String s) {
+    c = s.toCharArray();
+    dfs(0);
+    return res.toArray(new String[0]);
+}
+// 交换位置
+private void dfs(int index) {
+    if (index == c.length - 1) {
+        res.add(String.valueOf(c));
+        return;
+    }
+    Set<Character> set = new HashSet<>();
+    for (int i = index; i < c.length; i++) {
+        if (set.contains(c[i])) {
+            continue;
+        }
+        set.add(c[i]);
+        swap(i, index);
+        dfs(index + 1);
+        swap(i, index);//回溯操作
+    }
+}
+
+private void swap(int i, int index) {
+    char temp = c[i];
+    c[i] = c[index];
+    c[index] = temp;
+}
+```
+
+```text
+/**
+ * 回溯——标记数组
+ */
+public String[] permutation2(String s) {
+    List<String> res = new LinkedList<>();
+    int len = s.length();
+    boolean[] visited = new boolean[len];
+    char[] c = new char[len];
+    backtrace(s, 0, visited, c, res, len);
+    return res.toArray(new String[0]);
+}
+
+private void backtrace(String s, int index, boolean[] visited, char[] c, List<String> res, int len) {
+    if (index == len) {
+        res.add(String.valueOf(c));
+        return;
+    }
+    Set<Character> set = new HashSet<>();
+    for (int i = 0; i < len; i++) {
+        if (visited[i] || set.contains(s.charAt(i))) {
+            continue;
+        }
+        visited[i] = true;
+        set.add(s.charAt(i));
+        c[index] = s.charAt(i);
+        backtrace(s, index + 1, visited, c, res, len);
+        visited[i] = false;
+    }
+}
 ```
 
 #### 复杂度分析
