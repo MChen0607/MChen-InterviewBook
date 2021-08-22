@@ -28,35 +28,37 @@
 
 > 利用动态规划的思想，使得到达每个点的价值都为最大值。
 
-状态转移方程： 选择来自 **上方** 或者 **左边** 最大价值的。$$  
-dp\[i\]\[j\]=dp\[i\]\[j\]+Math.max\(dp\[i-1\]\[j\],dp\[i\]\[j-1\]\)  
-$$  
+状态转移方程： 选择来自 **上方** 或者 **左边** 最大价值的。
 
+$$
+dp[i][j]=dp[i][j]+Math.max(dp[i-1][j],dp[i][j-1])
+$$
 
 #### 代码实现
 
 ```text
- class Solution {
-     public int maxValue(int[][] grid) {
-         if (grid==null||grid.length == 0 || grid[0].length == 0) {
-             return -1;
-         }
-         int rows = grid.length;
-         int columns = grid[0].length;
-         for (int i = 1; i < columns; i++) {
-             grid[0][i] += grid[0][i - 1];
-         }
-         for (int i = 1; i < rows; i++) {
-             grid[i][0] += grid[i - 1][0];
-         }
-         for (int i = 1; i < rows; i++) {
-             for (int j = 1; j < columns; j++) {
-                 grid[i][j] += Math.max(grid[i - 1][j], grid[i][j - 1]);
-             }
-         }
-         return grid[rows - 1][columns - 1];
-     }
- }
+/**
+ * DP
+ */
+public int maxValue(int[][] grid) {
+    int rows = grid.length;
+    int columns = grid[0].length;
+    // 第一行
+    for (int i = 1; i < columns; i++) {
+        grid[0][i] += grid[0][i - 1];
+    }
+    // 第一列
+    for (int j = 1; j < rows; j++) {
+        grid[j][0] += grid[j - 1][0];
+    }
+    // 整体处理
+    for (int i = 1; i < rows; i++) {
+        for (int j = 1; j < columns; j++) {
+            grid[i][j] += Math.max(grid[i - 1][j], grid[i][j - 1]);
+        }
+    }
+    return grid[rows - 1][columns - 1];
+}
 ```
 
 #### 复杂度分析

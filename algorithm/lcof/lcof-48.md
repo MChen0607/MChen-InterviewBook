@@ -1,4 +1,4 @@
-# 48. 最长不重复字符的子字符串【哈希表、双指针】
+# 48. 最长不重复字符的子字符串【双指针+哈希表】
 
 ## 1.题目描述
 
@@ -8,7 +8,7 @@
 
 ```text
  输入: "abcabcbb"
- 输出: 3 
+ 输出: 3
  解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
 ```
 
@@ -45,27 +45,28 @@
 #### 代码实现
 
 ```text
- class Solution {
-     public int lengthOfLongestSubstring(String s) {
-         if(s==null||s.length()==0){
-             return 0;
-         }
-         int len = s.length();
-         int ans = 0;
-         int left = 0;
-         Map<Character, Integer> map = new HashMap<>();
-         for (int i = 0; i < len; i++) {
-             char c = s.charAt(i);
-             if (map.containsKey(c)) {
-                 ans = Math.max(ans, i - left);   
-                 left = Math.max(map.get(c) + 1, left);
-             }
-             map.put(c,i);
-         }
-         ans = Math.max(ans, len - left);
-         return ans;
-     }
- }
+/**
+ * 双指针+哈希表（MAP）
+ */
+public int lengthOfLongestSubstring(String s) {
+    if (s == null || s.length() == 0) {
+        return 0;
+    }
+    int len = s.length();
+    int ans = 0;
+    int left = 0;
+    Map<Character, Integer> map = new HashMap<>();
+    for (int i = 0; i < len; i++) {
+        char c = s.charAt(i);
+        if (map.containsKey(c)) {
+            ans = Math.max(ans, i - left);
+            left = Math.max(map.get(c) + 1, left);
+        }
+        map.put(c, i);
+    }
+    ans = Math.max(ans, len - left);
+    return ans;
+}
 ```
 
 #### 复杂度分析
@@ -81,28 +82,29 @@
 #### 代码实现
 
 ```text
- class Solution {
-     public int lengthOfLongestSubstring(String s) {
-         if (s == null || s.length() == 0) {
-             return 0;
-         }
-         int len = s.length();
-         int ans = 0;
-         int left = 0;
-         int[] last = new int[128];
-         int f = s.charAt(0);
-         for (int i = 1; i < len; i++) {
-             int c = s.charAt(i);
-             if (last[c] != 0 || c == f) {
-                 ans = Math.max(ans, i - left);
-                 left = Math.max(last[c] + 1, left);
-             }
-             last[c] = i;
-         }
-         ans = Math.max(ans, len - left);
-         return ans;
-     }
- }
+/**
+ * 双指针+哈希表（数组）
+ */
+public int lengthOfLongestSubstring2(String s) {
+    if (s == null || s.length() == 0) {
+        return 0;
+    }
+    int len = s.length();
+    int ans = 0;
+    int left = 0;
+    int[] last = new int[128];
+    int f = s.charAt(0);
+    for (int i = 1; i < len; i++) {
+        int c = s.charAt(i);
+        if (last[c] != 0 || c == f) {
+            ans = Math.max(ans, i - left);
+            left = Math.max(last[c] + 1, left);
+        }
+        last[c] = i;
+    }
+    ans = Math.max(ans, len - left);
+    return ans;
+}
 ```
 
 #### 复杂度分析
