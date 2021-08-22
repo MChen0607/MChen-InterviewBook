@@ -14,7 +14,7 @@
 
 **提示：**
 
-* `0 <= num < 231`
+* `0 <= num <`$$2^{31}$$ 
 
 ## 2.解题思路
 
@@ -28,39 +28,38 @@
 
 * 第一种：第i位和第i-1位字符组成字符串**在** 10~25范围内，则
 
-$$  
-dp\[i\]=dp\[i-1\]+dp\[i-2\]  
-$$  
-
+$$
+dp[i]=dp[i-1]+dp[i-2]
+$$
 
 * 第二种：第i位和第i-1位字符组成字符串**不在** 10~25范围内，则
 
-$$  
-dp\[i\]=dp\[i-1\]  
-$$  
-
+$$
+dp[i]=dp[i-1]
+$$
 
 **此题可对数组优化为两个变量进行。**
 
 #### 代码实现
 
 ```text
- class Solution {
-     public int translateNum(int num) {
-         String s = String.valueOf(num);
-         int a = 1, b = 1;
-         for (int i = 1; i < s.length(); i++) {
-             String temp = s.substring(i - 1, i+1);
-             int c = a;
-             if (temp.compareTo("10") >= 0 && temp.compareTo("25") <= 0) {
-                 c = a + b;
-             }
-             b = a;
-             a = c;
-         }
-         return a;
-     }
- }
+/**
+ * DP
+ */
+public int translateNum(int num) {
+    String s = String.valueOf(num);
+    int a = 1, b = 1;
+    for (int i = 1; i < s.length(); i++) {
+        String temp = s.substring(i - 1, i + 1);
+        int c = a;
+        if (temp.compareTo("10") >= 0 && temp.compareTo("25") <= 0) {
+            c = a + b;
+        }
+        b = a;
+        a = c;
+    }
+    return a;
+}
 ```
 
 #### 复杂度分析

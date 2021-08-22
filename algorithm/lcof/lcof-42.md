@@ -1,4 +1,4 @@
-# 42. 连续子数组的最大和
+# 42. 连续子数组的最大和【DP】
 
 ## 1.题目描述
 
@@ -23,31 +23,34 @@
 
 ### 2.1 方法一：动态规划
 
+> 遍历数组，如果当前的sum为正数，直接加上当前访问的数；如果为负数，则sum值重新赋值为当前访问的值。每次计算完与res结果进行比较，将最大值赋值给res。
+
 #### 代码实现
 
 ```text
- static class Solution42 {
-     public int maxSubArray(int[] nums) {
-         int ans = nums[0];
-         int sum = 0;
-         for (int num : nums) {
-             if (sum > 0) {
-                 sum += num;
-             } else {
-                 sum = num;
-             }
-             ans = Math.max(ans, sum);
-         }
-         return ans;
-     }
- }
+/**
+ * DP
+ */
+public int maxSubArray(int[] nums) {
+    int res = nums[0];
+    int sum = 0;
+    for (int num : nums) {
+        if (sum > 0) {
+            sum += num;
+        } else {
+            sum = num;
+        }
+        res = Math.max(res, sum);
+    }
+    return res;
+}
 ```
 
 #### 复杂度分析
 
-> 时间复杂度：
+> 时间复杂度：O\(n\)
 >
-> 空间复杂度：
+> 空间复杂度：O\(1\)
 
 ## 3.参考
 

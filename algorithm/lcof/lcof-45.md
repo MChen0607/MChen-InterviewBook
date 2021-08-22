@@ -36,24 +36,22 @@
 #### 实现代码
 
 ```text
- import java.util.ArrayList;
- import java.util.Arrays;
- ​
- public class Solution {
-     public String PrintMinNumber(int [] numbers) {
-         int len = numbers.length;
-         String[] strs = new String[len];
-         for (int i = 0; i < len; i++) {
-             strs[i] = String.valueOf(numbers[i]);
-         }
-         Arrays.sort(strs, (x, y) -> (x + y).compareTo(y + x));
-         StringBuilder stringBuilder = new StringBuilder();
-         for (int i = 0; i < len; i++) {
-             stringBuilder.append(strs[i]);
-         }
-         return stringBuilder.toString();
-     }
- }
+/**
+ * 排序
+ */
+public String PrintMinNumber(int[] numbers) {
+    int len = numbers.length;
+    String[] strs = new String[len];
+    for (int i = 0; i < len; i++) {
+        strs[i] = String.valueOf(numbers[i]);
+    }
+    Arrays.sort(strs, (x, y) -> (x + y).compareTo(y + x));
+    StringBuilder stringBuilder = new StringBuilder();
+    for (int i = 0; i < len; i++) {
+        stringBuilder.append(strs[i]);
+    }
+    return stringBuilder.toString();
+}
 ```
 
 #### 复杂度分析

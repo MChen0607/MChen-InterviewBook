@@ -1,4 +1,4 @@
-# 43. 1到n整数中1出现的次数
+# 43. 1到n整数中1出现的次数\*【数学】
 
 ## 1.题目描述
 
@@ -28,13 +28,28 @@
 
 ### 2.1 方法一：数学统计
 
+> 分别计算每一位出现1的总数，再相加
+
 #### 代码实现
 
 ```text
- ​
+​/**
+ * 数学
+ */
+public int countDigitOne(int n) {
+    // mulk 表示 10^k
+    long mulk = 1;
+    int ans = 0;
+    while (n >= mulk) {
+        ans += (n / (mulk * 10)) * mulk + Math.min(Math.max(n % (mulk * 10) - mulk + 1, 0), mulk);
+        mulk *= 10;
+    }
+    return ans;
+}
 ```
 
 ## 3.参考
 
 * [https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/](https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/)
+* [https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/solution/1n-zheng-shu-zhong-1-chu-xian-de-ci-shu-umaj8/](https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/solution/1n-zheng-shu-zhong-1-chu-xian-de-ci-shu-umaj8/)
 
