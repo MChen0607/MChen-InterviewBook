@@ -57,7 +57,7 @@
   * [48. 最长不重复字符的子字符串【双指针+哈希表】](algorithm/lcof/lcof-48.md)
   * [49. 丑数【三指针+DP】](algorithm/lcof/lcof-49.md)
   * [50. 第一个只出现一次的字符【哈希表/查找】](algorithm/lcof/lcof-50.md)
-  * [51. 数组中的逆序对【分治、归并】](algorithm/lcof/lcof-51.md)
+  * [51. 数组中的逆序对\*【归并】](algorithm/lcof/lcof-51.md)
   * [52. 两个链表的第一个公共节点【双指针】](algorithm/lcof/lcof-52.md)
   * [53-Ⅰ 在排序数组中查找数字Ⅰ【二分查找】](algorithm/lcof/lcof-53-i.md)
   * [53 -Ⅱ 0到n-1中缺失的数字【二分查找、数学】](algorithm/lcof/lcof-53-ii.md)
