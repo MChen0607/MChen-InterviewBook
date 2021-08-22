@@ -1,4 +1,4 @@
-# 50. 第一个只出现一次的字符【哈希表、查找】
+# 50. 第一个只出现一次的字符【哈希表/查找】
 
 ## 1.题目描述
 
@@ -29,22 +29,23 @@
 #### 代码实现
 
 ```text
- class Solution {
-     public char firstUniqChar(String s) {
-         int []nums=new int [95];
-         for(int i=0;i<s.length();i++){
-             int index=s.charAt(i)-32;
-             nums[index]++;
-         }
-         for(int i=0;i<s.length();i++){
-             int index=s.charAt(i)-32;
-             if(nums[index]==1){
-                 return s.charAt(i);
-             }
-         }
-         return ' ';
-     }
- }
+/**
+ * 哈希表
+ */
+public char firstUniqChar(String s) {
+    int[] nums = new int[95];
+    for (int i = 0; i < s.length(); i++) {
+        int index = s.charAt(i) - 32;
+        nums[index]++;
+    }
+    for (int i = 0; i < s.length(); i++) {
+        int index = s.charAt(i) - 32;
+        if (nums[index] == 1) {
+            return s.charAt(i);
+        }
+    }
+    return ' ';
+}
 ```
 
 #### 复杂度分析
@@ -66,31 +67,32 @@
 #### 代码实现
 
 ```text
- class Solution {
-     public char firstUniqChar(String s) {
-         if(s==null || s.length() == 0)
-             return ' ';
- ​
-         int firstIndex = s.length(); 
-         for(char a = 'a'; a <= 'z'; a++){
-             int i = s.indexOf(a);
-             if(i >=0 && i == s.lastIndexOf(a)){
-                if(firstIndex > i){
-                    firstIndex = i;
-                }
-             }
-         }
-         return firstIndex == s.length() ? ' ' : s.charAt(firstIndex);
-     }
- }
- ​
- // s.indexOf(a);    [从前往后遍历] 找到第一个出现字符就返回下标，找不到就返回-1;
- // s.lastIndexOf(a);[从后往前遍历] 找到最后一个出现字符就返回下标，找不到就返回-1;
+/**
+ * 查找
+ */
+public char firstUniqChar2(String s) {
+    if (s == null || s.length() == 0)
+        return ' ';
+
+    int firstIndex = s.length();
+    for (char a = 'a'; a <= 'z'; a++) {
+        int i = s.indexOf(a);
+        if (i >= 0 && i == s.lastIndexOf(a)) {
+            if (firstIndex > i) {
+                firstIndex = i;
+            }
+        }
+    }
+    return firstIndex == s.length() ? ' ' : s.charAt(firstIndex);
+}
+// s.indexOf(a);    [从前往后遍历] 找到第一个出现字符就返回下标，找不到就返回-1;
+// s.lastIndexOf(a);[从后往前遍历] 找到最后一个出现字符就返回下标，找不到就返回-1;
+
 ```
 
 #### 复杂度分析
 
-> 时间复杂度：O\(n\) O\(26n\)
+> 时间复杂度：O\(n\)  \# O\(26n\)
 >
 > 空间复杂度：O\(1\)
 
