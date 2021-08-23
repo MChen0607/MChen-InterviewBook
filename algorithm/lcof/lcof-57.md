@@ -2,7 +2,7 @@
 
 ## 1.题目描述
 
-输入一个递增排序的数组和一个数字s，在数组中查找两个数，使得它们的和正好是s。如果有多对数字的和等于s，则输出任意一对即可。
+输入一个**递增排序**的数组和一个数字s，在数组中查找两个数，使得它们的和正好是s。如果有多对数字的和等于s，则输出任意一对即可。
 
 **示例 1：**
 
@@ -22,8 +22,6 @@
 
 * `1 <= nums.length <= 10^5`
 * `1 <= nums[i] <= 10^6`
-
-&lt;!--more--&gt;
 
 ## 2.解题思路
 
@@ -56,6 +54,38 @@
 > 时间复杂度：O\(n\)
 >
 > 空间复杂度：O\(1\)
+
+### 2.2 方法二：哈希表
+
+> 使用哈希表记录遍历过的数，确定target-num是否遍历过。
+>
+> 注：效率低
+
+#### 代码实现
+
+```text
+/**
+ * 哈希表
+ * 适用范围：所有
+ */
+public int[] twoSum2(int[] nums, int target) {
+    Map<Integer, Integer> map = new HashMap<>();
+    for (int num : nums) {
+        if (map.containsKey(target - num)) {
+            return new int[]{num, target - num};
+        } else {
+            map.put(num, num);
+        }
+    }
+    return new int[0];
+}
+```
+
+#### 复杂度分析
+
+> 时间复杂度：O\(n\)
+>
+> 空间复杂度：O\(n\)
 
 ## 3.参考
 

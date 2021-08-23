@@ -24,8 +24,6 @@
 
 * `1 <= target <= 10^5`
 
-&lt;!--more--&gt;
-
 ## 2.解题思路
 
 ### 2.1 方法一：双指针
@@ -35,27 +33,28 @@
 #### 代码实现
 
 ```text
- class Solution57_2 {
-     public int[][] findContinuousSequence(int target) {
-         List<int[]> vec = new ArrayList<>();
-         for (int l = 1, r = 2; l < r;) {
-             int sum = (l + r) * (r - l + 1) / 2;
-             if (sum == target) {
-                 int[] res = new int[r - l + 1];
-                 for (int i = l; i <= r; ++i) {
-                     res[i - l] = i;
-                 }
-                 vec.add(res);
-                 l++;
-             } else if (sum < target) {
-                 r++;
-             } else {
-                 l++;
-             }
-         }
-         return vec.toArray(new int[vec.size()][]);
-     }
- }
+/**
+ * 双指针
+ */
+public int[][] findContinuousSequence(int target) {
+    List<int[]> vec = new ArrayList<>();
+    for (int l = 1, r = 2; l <= (target - 1) / 2; ) {
+        int sum = (l + r) * (r - l + 1) / 2;
+        if (sum == target) {
+            int[] res = new int[r - l + 1];
+            for (int i = l; i <= r; ++i) {
+                res[i - l] = i;
+            }
+            vec.add(res);
+            l++;
+        } else if (sum < target) {
+            r++;
+        } else { // sum>target
+            l++;
+        }
+    }
+    return vec.toArray(new int[vec.size()][]);
+}
 ```
 
 #### 复杂度分析：

@@ -1,4 +1,4 @@
-# 53 -Ⅱ 0到n-1中缺失的数字【二分查找、数学】
+# 53 -Ⅱ 0到n-1中缺失的数字【二分查找/数学】
 
 ## 1.题目描述
 
@@ -69,15 +69,32 @@
 **代码实现**
 
 ```text
- public int missingNumber1(int[] nums) {
-     int len = nums.length;
-     int sum = 0;
-     for (int num : nums) {
-         sum += num;
-     }
-     return (len+1)*len/2-sum;
- }
- // 可能存在的问题，int溢出。
+/**
+ * 数学
+ * 有可能溢出
+ */
+public int missingNumber1(int[] nums) {
+    int len = nums.length;
+    int sum = 0;
+    for (int num : nums) {
+        sum += num; // 可能出现溢出问题
+    }
+    return (len + 1) * len / 2 - sum;
+}
+
+/**
+ * 数学
+ * 解决溢出问题
+ */
+public int missingNumber2(int[] nums) {
+    int len = nums.length;
+    long sum = 0;
+    for (int i = 0; i < len; i++) {
+        long diff = i - nums[i];
+        sum += diff;
+    }
+    return (int) sum + len;
+}
 ```
 
 **复杂度分析**

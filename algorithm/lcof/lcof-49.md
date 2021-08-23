@@ -28,35 +28,36 @@
 #### 实现代码
 
 ```text
- class Solution {
-     public int nthUglyNumber(int n) {
-         if(n<=0){
-             return 0;
-         }
-         int[] dp=new int[n];
-         dp[0]=1;
-         int a=0;
-         int b=0;
-         int c=0;
-         for(int i=1;i<n;i++){
-             int num2=dp[a]*2;
-             int num3=dp[b]*3;
-             int num5=dp[c]*5;
-             int num=Math.min(num2,Math.min(num3,num5));
-             dp[i]=num;
-             if(num==num2){
-                 a++;
-             }
-             if(num==num3){
-                 b++;
-             }
-             if(num==num5){
-                 c++;
-             }
-         }
-         return dp[n-1];
-     }
- }
+/**
+ * 三指针+DP
+ */
+public int nthUglyNumber(int n) {
+    if (n <= 0) {
+        return 0;
+    }
+    int[] dp = new int[n];
+    dp[0] = 1;
+    int a = 0;
+    int b = 0;
+    int c = 0;
+    for (int i = 1; i < n; i++) {
+        int num2 = dp[a] * 2;
+        int num3 = dp[b] * 3;
+        int num5 = dp[c] * 5;
+        int num = Math.min(num2, Math.min(num3, num5));
+        dp[i] = num;
+        if (num == num2) {
+            a++;
+        }
+        if (num == num3) {
+            b++;
+        }
+        if (num == num5) {
+            c++;
+        }
+    }
+    return dp[n - 1];
+}
 ```
 
 #### 复杂度分析

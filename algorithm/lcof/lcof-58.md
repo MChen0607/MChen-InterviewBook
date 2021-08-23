@@ -31,25 +31,28 @@
 #### 代码实现
 
 ```text
- public String reverseLeftWords(String s, int n) {
-     StringBuilder stringBuilder = new StringBuilder();
-     int len = s.length();
-     n = n % len;
-     if (n == 0) {
-         return s;
-     }
-     for (int i = n; i < len; i++) {
-         stringBuilder.append(s.charAt(i));
-     }
-     for (int i = 0; i < n; i++) {
-         stringBuilder.append(s.charAt(i));
-     }
-     // 取余操作
-     //for (int i = n; i < n+len; i++) {
-     //   stringBuilder.append(s.charAt(i%len));
-     //}
-     return stringBuilder.toString();
- }
+/**
+ * StringBuilder
+ */
+public String reverseLeftWords(String s, int n) {
+    StringBuilder stringBuilder = new StringBuilder();
+    int len = s.length();
+    n = n % len;
+    if (n == 0) {
+        return s;
+    }
+    for (int i = n; i < len; i++) {
+        stringBuilder.append(s.charAt(i));
+    }
+    for (int i = 0; i < n; i++) {
+        stringBuilder.append(s.charAt(i));
+    }
+    // 取余操作
+    //for (int i = n; i < n+len; i++) {
+    //   stringBuilder.append(s.charAt(i%len));
+    //}
+    return stringBuilder.toString();
+}
 ```
 
 #### 复杂度分析
@@ -58,19 +61,22 @@
 >
 > 空间复杂度:O\(n\)
 
-### 2.2 方法二：substring\(\)
+### 2.2 方法二:substring\(\)
 
 > 使用String内置substring函数
 
 #### 代码实现
 
 ```text
- public String reverseLeftWords(String s, int n) {
-     int a = s.length();
-     String str = s.substring(0, n);
-     String str2 = s.substring(n, a);
-     return str2 + str;
- }
+/**
+ * substring
+ */
+public String reverseLeftWords2(String s, int n) {
+    int a = s.length();
+    String str = s.substring(0, n);
+    String str2 = s.substring(n, a);
+    return str2 + str;
+}
 ```
 
 #### 复杂度分析

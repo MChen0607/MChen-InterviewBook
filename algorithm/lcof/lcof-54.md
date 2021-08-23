@@ -1,4 +1,4 @@
-# 54. 二叉搜索树的第k大节点【DFS】
+# 54. 二叉搜索树的第k大节点【中序遍历】
 
 ## 1.题目描述
 
@@ -38,37 +38,37 @@
 
 ### 2.1 方法一:深度优先搜索DFS
 
-> 类似中序遍历思想，先遍历右子树后遍历左子树的，访问根节点时，对k进行减一操作，当k==0时，退出递归，设置res.
+> 类似**中序遍历**思想，先遍历右子树后遍历左子树的，访问根节点时，对k进行减一操作，当k==0时，退出递归，设置res.
 
 #### 实现代码
 
 ```text
- class Solution54 {
-     int res = -1, n;
- ​
-     public int kthLargest(TreeNode root, int k) {
-         if (root == null || k == 0) {
-             return -1;
-         }
-         n = k;
-         dfs(root);
-         return res;
-     }
- ​
-     private void dfs(TreeNode root) {
-         if (root == null)
-             return;
-         dfs(root.right);
-         if (n == 0) {
-             return;
-         }
-         if (--n == 0) {
-             res = root.val;
-             return;
-         }
-         dfs(root.left);
-     }
- }
+/**
+ * 中序遍历--DFS
+ */
+int res = -1, n;
+public int kthLargest(TreeNode root, int k) {
+    if (root == null || k == 0) {
+        return -1;
+    }
+    n = k;
+    dfs(root);
+    return res;
+}
+
+private void dfs(TreeNode root) {
+    if (root == null)
+        return;
+    dfs(root.right);
+    if (n == 0) {
+        return;
+    }
+    if (--n == 0) {
+        res = root.val;
+        return;
+    }
+    dfs(root.left);
+}
 ```
 
 #### 复杂度分析

@@ -42,25 +42,27 @@
 #### 代码实现
 
 ```text
- class Solution58_1 {
-     public String reverseWords(String s) {
-         s = s.trim();
-         int j = s.length() - 1;
-         int i = j;
-         StringBuilder stringBuilder = new StringBuilder();
-         while (i >= 0) {
-             while (i >= 0 && s.charAt(i) != ' ') {
-                 i--;
-             }
-             stringBuilder.append(s, i + 1, j + 1).append(' ');
-             while (i >= 0 && s.charAt(i) == ' ') {
-                 i--;
-             }
-             j = i;
-         }
-         return stringBuilder.toString().trim();
-     }
- }
+/**
+ * 遍历
+ */
+public String reverseWords(String s) {
+    s = s.trim(); // 去除头尾空格
+    int j = s.length() - 1;
+    int i = j;
+    StringBuilder stringBuilder = new StringBuilder();
+    while (i >= 0) {
+        while (i >= 0 && s.charAt(i) != ' ') { // 确定单词的头部
+            i--;
+        }
+        stringBuilder.append(s, i + 1, j + 1).append(' ');
+        while (i >= 0 && s.charAt(i) == ' ') { // 确定单词的结尾
+            i--;
+        }
+        j = i;
+    }
+    return stringBuilder.toString().trim();
+}
+
 ```
 
 #### 复杂度分析
@@ -76,24 +78,27 @@
 #### 代码实现
 
 ```text
- public String reverseWords(String s) {
-     //将传进来的字符串以空格拆分
-     String[] strings = s.trim().split(" ");
-     StringBuffer stringBuffer = new StringBuffer();
-     //从尾巴开始遍历
-     for (int i = strings.length - 1; i >= 0; i--) {
-         // 两个空格间会被分割成""
-         if (strings[i].equals("")) {
-             continue;
-         }
-         if (i == 0) {
-             stringBuffer.append(strings[i]);
-         } else {
-             stringBuffer.append(strings[i]).append(" ");
-         }
-     }
-     return stringBuffer.toString();
- }
+/**
+ * 内置函数
+ */
+public String reverseWords2(String s) {
+    //将传进来的字符串以空格拆分
+    String[] strings = s.trim().split(" ");
+    StringBuilder stringBuilder = new StringBuilder();
+    //从尾巴开始遍历
+    for (int i = strings.length - 1; i >= 0; i--) {
+        // 两个空格间会被分割成""
+        if (strings[i].equals("")) {
+            continue;
+        }
+        if (i == 0) {
+            stringBuilder.append(strings[i]);
+        } else {
+            stringBuilder.append(strings[i]).append(" ");
+        }
+    }
+    return stringBuilder.toString();
+}
 ```
 
 #### 复杂度分析

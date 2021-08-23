@@ -1,4 +1,4 @@
-# 56 -Ⅰ 数组中数字出现的次数【数学】
+# 56 -Ⅰ 数组中数字出现的次数【位运算】
 
 ## 1.题目描述
 
@@ -24,7 +24,7 @@
 
 ## 2.解题思路
 
-### 2.1 方法一：数学-异或
+### 2.1 方法一：位运算-异或
 
 > 先遍历一遍数组，用0异或所有数，得出结果为t,则t为答案值a,b的异或结果，则将cp=1，进行处理，得到a,b两个数不同的最小位。
 >
@@ -35,28 +35,32 @@
 #### 代码实现
 
 ```text
- class Solution {
-     public int[] singleNumbers(int[] nums) {
-         int len = nums.length;
-         if (len == 0) {
-             return new int[0];
-         }
-         int a = 0, b = 0, t = 0;
-         for (int i = 0; i < len; i++) {
-             t = t ^ nums[i];
-         }
-         int cp = 1;
-         while ((cp & t) == 0) {
-             cp = cp << 1;
-         }
-         for (int i = 0; i < len; i++) {
-             if ((cp & nums[i]) == 0) {
-                 a = a ^ nums[i];
-             }
-         }
-         return new int[]{a, a^t};//求出a后，则b=a^t  t为a^b.
-     }
- }
+/**
+ * 位运算
+ */
+public int[] singleNumbers(int[] nums) {
+    int len = nums.length;
+    if (len == 0) {
+        return new int[0];
+    }
+    int a = 0, t = 0;
+    // 得出两个数异或的结果，只需求出一个数，就能得到另一个数
+    for (int j : nums) {
+        t = t ^ j;
+    }
+    // 确定两个数不同的最低位
+    int cp = 1;
+    while ((cp & t) == 0) {
+        cp = cp << 1;
+    }
+    // 求出一个数。
+    for (int num : nums) {
+        if ((cp & num) == 0) {
+            a = a ^ num;
+        }
+    }
+    return new int[]{a, a ^ t};//求出a后，则b=a^t  t为a^b.
+}
 ```
 
 #### 复杂度分析

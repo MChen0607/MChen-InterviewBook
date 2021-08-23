@@ -51,6 +51,41 @@
 >
 > 空间复杂度：O\(1\)
 
+### 2.2 方法二：哈希表--统计
+
+> 计算出每一位1的个数，最后将总的个数%3得到答案。
+>
+> 注：效率慢
+
+#### 代码实现
+
+```text
+/**
+ * 统计
+ */
+public int singleNumber2(int[] nums) {
+    int[] counts = new int[32];
+    for (int num : nums) {
+        for (int j = 0; j < 32; j++) {
+            counts[j] += num & 1;
+            num >>>= 1; //无符号位左移一位
+        }
+    }
+    int res = 0, m = 3;
+    for (int i = 0; i < 32; i++) {
+        res <<= 1;
+        res |= counts[31 - i] % m;
+    }
+    return res;
+}
+```
+
+#### 复杂度分析
+
+> 时间复杂度:O\(n\) \# O\(32n\)
+>
+> 空间复杂度:O\(1\) \# O\(32\)
+
 ## 3.参考
 
 * [https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/)
