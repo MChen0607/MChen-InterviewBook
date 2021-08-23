@@ -50,45 +50,52 @@
 #### 代码实现
 
 ```text
- public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-     int sizeA = 0, sizeB = 0;
-     ListNode nodeA = headA;
-     while (nodeA != null) {
-         sizeA++;
-         nodeA = nodeA.next;
-     }
-     ListNode nodeB = headB;
-     while (nodeB != null) {
-         sizeB++;
-         nodeB = nodeB.next;
-     }
-     if (sizeA == 0 || sizeB == 0) {
-         return null;
-     }
-     nodeA = headA;
-     nodeB = headB;
-     if (sizeA > sizeB) {
-         int len = sizeA - sizeB;
-         while (len > 0) {
-             len -= 1;
-             nodeA = nodeA.next;
-         }
-     } else if (sizeB > sizeA) {
-         int len = sizeB - sizeA;
-         while (len > 0) {
-             len -= 1;
-             nodeB = nodeB.next;
-         }
-     }
-     while (nodeA != null && nodeB != null) {
-         if (nodeA == nodeB) {
-             return nodeA;
-         }
-         nodeA = nodeA.next;
-         nodeB = nodeB.next;
-     }
-     return null;
- }
+/**
+ * 双指针
+ */
+public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+    int sizeA = 0, sizeB = 0;
+    // 计算A链表的长度
+    ListNode nodeA = headA;
+    while (nodeA != null) {
+        sizeA++;
+        nodeA = nodeA.next;
+    }
+    // 计算B链表的长度
+    ListNode nodeB = headB;
+    while (nodeB != null) {
+        sizeB++;
+        nodeB = nodeB.next;
+    }
+    if (sizeA == 0 || sizeB == 0) {
+        return null;
+    }
+    // 长度长的链表先前进长度差步数
+    nodeA = headA;
+    nodeB = headB;
+    if (sizeA > sizeB) {
+        int len = sizeA - sizeB;
+        while (len > 0) {
+            len -= 1;
+            nodeA = nodeA.next;
+        }
+    } else if (sizeB > sizeA) {
+        int len = sizeB - sizeA;
+        while (len > 0) {
+            len -= 1;
+            nodeB = nodeB.next;
+        }
+    }
+    // 链表A、B共同前进，判断是否相等
+    while (nodeA != null && nodeB != null) {
+        if (nodeA == nodeB) {
+            return nodeA;
+        }
+        nodeA = nodeA.next;
+        nodeB = nodeB.next;
+    }
+    return null;
+}
 ```
 
 #### 复杂度分析
@@ -104,16 +111,17 @@
 #### 代码实现
 
 ```text
- public class Solution {
-     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-         ListNode A = headA, B = headB;
-         while (A != B) {
-             A = A != null ? A.next : headB;
-             B = B != null ? B.next : headA;
-         }
-         return A;
-     }
- }
+/**
+ * 双指针
+ */
+public ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
+    ListNode A = headA, B = headB;
+    while (A != B) {
+        A = A != null ? A.next : headB;
+        B = B != null ? B.next : headA;
+    }
+    return A;
+}
 ```
 
 #### 复杂度分析

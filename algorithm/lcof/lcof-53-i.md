@@ -28,38 +28,39 @@
 
 ### 2.1方法一：二分查找
 
-> 先二分查找到target后，在对查找到的数字前后搜索，统计完所有target值的数量
+> 先二分查找找到target后，在对查找到的数字前后搜索，统计完所有target值的数量
 
 #### **实现代码**
 
 ```text
- class Solution {
-     public int search(int[] nums, int target) {
-         int right = nums.length - 1, left = 0;
-         while (left <= right) {
-             int mid = left + (right - left) / 2;
-             if (nums[mid] == target) {
-                 int res = 1;
-                 int temp = mid - 1;
-                 mid++;
-                 while (mid < nums.length && nums[mid] == target) {
-                     res++;
-                     mid++;
-                 }
-                 while (temp >= 0 && nums[temp] == target) {
-                     res++;
-                     temp--;
-                 }
-                 return res;
-             } else if (nums[mid] < target) {
-                 left = mid + 1;
-             } else {
-                 right = mid - 1;
-             }
-         }
-         return 0;
-     }
- }
+/**
+ * 二分查找
+ */
+public int search(int[] nums, int target) {
+    int right = nums.length - 1, left = 0;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (nums[mid] == target) {
+            int res = 1;
+            int index = mid - 1;
+            mid++;
+            while (mid < nums.length && nums[mid] == target) {
+                res++;
+                mid++;
+            }
+            while (index >= 0 && nums[index] == target) {
+                res++;
+                index--;
+            }
+            return res;
+        } else if (nums[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return 0;
+}
 ```
 
 **复杂度分析**
