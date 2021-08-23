@@ -8,7 +8,7 @@
 
 例如，给定如下二叉搜索树: root = \[6,2,8,0,4,7,9,null,null,3,5\]
 
-![img](https://mchen0607.github.io/images/binarysearchtree_improved.png)
+![](https://mchen0607.github.io/images/binarysearchtree_improved.png)
 
 **示例 1:**
 
@@ -46,21 +46,21 @@
 #### 代码实现
 
 ```text
- class Solution68_1 {
-     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-         TreeNode ancestor = root;
-         while (true) {
-             if (p.val < ancestor.val && q.val < ancestor.val) {
-                 ancestor = ancestor.left;
-             } else if (p.val > ancestor.val && q.val > ancestor.val) {
-                 ancestor = ancestor.right;
-             } else {
-                 break;
-             }
-         }
-         return ancestor;
-     }
- }
+/**
+ * 性质
+ */
+public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+    TreeNode ancestor = root;
+    while (true) {
+        if (p.val < ancestor.val && q.val < ancestor.val) {
+            ancestor = ancestor.left;
+        } else if (p.val > ancestor.val && q.val > ancestor.val) {
+            ancestor = ancestor.right;
+        } else {
+            break;
+        }
+    }
+   
 ```
 
 #### 复杂度分析

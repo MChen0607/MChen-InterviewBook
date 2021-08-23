@@ -1,4 +1,4 @@
-# 68-Ⅱ 二叉树的最近公共祖先【哈希表、递归+DFS】
+# 68-Ⅱ 二叉树的最近公共祖先【哈希表/递归+DFS】
 
 ## 1.题目描述
 
@@ -17,8 +17,6 @@
  输出: 3
  解释: 节点 5 和节点 1 的最近公共祖先是节点 3。
 ```
-
-&lt;!--more--&gt;
 
 **示例 2:**
 
@@ -46,23 +44,26 @@
 #### 代码实现
 
 ```text
- class Solution {
-     private TreeNode ans;
-     private boolean dfs(TreeNode root, TreeNode p, TreeNode q) {
-         if (root == null) return false;
-         boolean lson = dfs(root.left, p, q);
-         boolean rson = dfs(root.right, p, q);
-         if ((lson && rson) || ((root.val == p.val || root.val == q.val) && (lson || rson))) {
-             ans = root;
-         }
-         return lson || rson || (root.val == p.val || root.val == q.val);
-     }
-     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-         ans = null;
-         this.dfs(root, p, q);
-         return ans;
-     }
- }
+/**
+ * 递归+深度优先搜索
+ */
+private TreeNode ans;
+
+private boolean dfs(TreeNode root, TreeNode p, TreeNode q) {
+    if (root == null) return false;
+    boolean lson = dfs(root.left, p, q);
+    boolean rson = dfs(root.right, p, q);
+    if ((lson && rson) || ((root.val == p.val || root.val == q.val) && (lson || rson))) {
+        ans = root;
+    }
+    return lson || rson || (root.val == p.val || root.val == q.val);
+}
+
+public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+    ans = null;
+    this.dfs(root, p, q);
+    return ans;
+}
 ```
 
 #### 复杂度分析
@@ -78,36 +79,39 @@
 #### 代码实现
 
 ```text
- class Solution {
-     Map<Integer, TreeNode> parent = new HashMap<Integer, TreeNode>();
-     Set<Integer> visited = new HashSet<Integer>();
- ​
-     public void dfs(TreeNode root) {
-         if (root.left != null) {
-             parent.put(root.left.val, root);
-             dfs(root.left);
-         }
-         if (root.right != null) {
-             parent.put(root.right.val, root);
-             dfs(root.right);
-         }
-     }
- ​
-     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-         dfs(root);
-         while (p != null) {
-             visited.add(p.val);
-             p = parent.get(p.val);
-         }
-         while (q != null) {
-             if (visited.contains(q.val)) {
-                 return q;
-             }
-             q = parent.get(q.val);
-         }
-         return null;
-     }
- }
+/**
+ * 哈希表
+ */
+class Solution {
+    Map<Integer, TreeNode> parent = new HashMap<Integer, TreeNode>();
+    Set<Integer> visited = new HashSet<Integer>();
+
+    public void dfs(TreeNode root) {
+        if (root.left != null) {
+            parent.put(root.left.val, root);
+            dfs(root.left);
+        }
+        if (root.right != null) {
+            parent.put(root.right.val, root);
+            dfs(root.right);
+        }
+    }
+
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        dfs(root);
+        while (p != null) {
+            visited.add(p.val);
+            p = parent.get(p.val);
+        }
+        while (q != null) {
+            if (visited.contains(q.val)) {
+                return q;
+            }
+            q = parent.get(q.val);
+        }
+        return null;
+    }
+}
 ```
 
 #### 复杂度分析

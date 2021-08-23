@@ -71,53 +71,53 @@
 #### 代码实现
 
 ```text
- class Solution {
-     public int strToInt(String str) {
-         int len=str.length();
-         int i=0;
-         int res=0;
-         int flag=1;
-         int num=0;
-         boolean f=false;
-         while(i<len){
-             if(str.charAt(i)==' '){
-                 if(f){//判断是否出现+、-、数字
-                     return res*flag;
-                 }
-             }else if(str.charAt(i)=='-'){
-                 if(f){
-                     return res*flag;
-                 }
-                 flag=-1;
-                 f=true;
-             }else if(str.charAt(i)=='+'){
-                 if(f){
-                     return res*flag;
-                 }
-                 flag=1;
-                 f=true;
-             }
-             else{
-                 if((str.charAt(i)>='0'&&str.charAt(i)<='9')){//判断是否为数字
-                     f=true;
-                     num=str.charAt(i)-'0';
-                     if(res>Integer.MAX_VALUE/10||(res==Integer.MAX_VALUE/10&&num>=8)){
-                         if(flag==-1){
-                             return Integer.MIN_VALUE;
-                         }else{
-                             return Integer.MAX_VALUE;
-                         }
-                     }
-                     res=res*10+num;
-                 }else{
-                     break;
-                 }
-             }
-             i+=1;//字符串下标右移
-         }
-         return res*flag;
-     }
- }
+/**
+ * 遍历+状态转移
+ */
+public int strToInt(String str) {
+    int len = str.length();
+    int i = 0;
+    int res = 0;
+    int flag = 1;
+    int num = 0;
+    boolean f = false;
+    while (i < len) {
+        if (str.charAt(i) == ' ') {
+            if (f) {//判断是否出现+、-、数字
+                return res * flag;
+            }
+        } else if (str.charAt(i) == '-') {
+            if (f) {
+                return res * flag;
+            }
+            flag = -1;
+            f = true;
+        } else if (str.charAt(i) == '+') {
+            if (f) {
+                return res * flag;
+            }
+            flag = 1;
+            f = true;
+        } else {
+            if ((str.charAt(i) >= '0' && str.charAt(i) <= '9')) {//判断是否为数字
+                f = true;
+                num = str.charAt(i) - '0';
+                if (res > Integer.MAX_VALUE / 10 || (res == Integer.MAX_VALUE / 10 && num >= 8)) {
+                    if (flag == -1) {
+                        return Integer.MIN_VALUE;
+                    } else {
+                        return Integer.MAX_VALUE;
+                    }
+                }
+                res = res * 10 + num;
+            } else {
+                break;
+            }
+        }
+        i += 1;//字符串下标右移
+    }
+    return res * flag;
+}
 ```
 
 **复杂度分析**

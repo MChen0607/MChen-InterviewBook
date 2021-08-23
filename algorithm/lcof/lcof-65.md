@@ -25,16 +25,17 @@
 #### 代码实现
 
 ```text
- class Solution {
-     public int add(int a, int b) {
-         while (b != 0) {
-             int c = (a & b) << 1;
-             a = a ^ b;
-             b = c;
-         }
-         return a;
-     }
- }
+/**
+ * 位运算
+ */
+public int add(int a, int b) {
+    while (b != 0) {
+        int c = (a & b) << 1; //进位
+        a = a ^ b;  // 没有进位的加法
+        b = c;
+    }
+    return a;
+}
 ```
 
 #### 复杂度分析

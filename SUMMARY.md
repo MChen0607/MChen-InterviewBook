@@ -6,6 +6,7 @@
 
 * [面试题](algorithm/practice/README.md)
   * [反转链表【递归/迭代】](algorithm/practice/fan-zhuan-lian-biao.md)
+  * [约瑟夫问题](algorithm/practice/yue-se-fu-wen-ti.md)
 * [剑指Offer](algorithm/lcof/README.md)
   * [03. 数组中重复的数字【排序/哈希表/数组交换】](algorithm/lcof/lcof-03.md)
   * [04. 二维数组中的查找【线性查找】](algorithm/lcof/lcof-04.md)
@@ -73,15 +74,15 @@
   * [59-Ⅰ 滑动窗口的最大值\*【最大堆/单调队列/分块】](algorithm/lcof/lcof-59-i.md)
   * [59 -Ⅱ 队列的最大值【设计+队列】](algorithm/lcof/lcof-59-ii.md)
   * [60. n个骰子的点数【DP】](algorithm/lcof/lcof-60.md)
-  * [61. 扑克牌中的顺子【数学、辅助数组】](algorithm/lcof/lcof-61.md)
-  * [62. 圆圈中最后剩下的数字【约瑟夫问题】](algorithm/lcof/lcof-62.md)
+  * [61. 扑克牌中的顺子【排序/哈希表】](algorithm/lcof/lcof-61.md)
+  * [62. 圆圈中最后剩下的数字\*【约瑟夫问题】](algorithm/lcof/lcof-62.md)
   * [63. 股票的最大利润【DP】](algorithm/lcof/lcof-63.md)
   * [64. 求1+2+3+...+n 【递归】](algorithm/lcof/lcof-64.md)
   * [65. 不用加减乘除做加法【位运算】](algorithm/lcof/lcof-65.md)
   * [66. 构建乘积数组【辅助数组】](algorithm/lcof/lcof-66.md)
   * [67. 把字符串转换成整数【字符串】](algorithm/lcof/lcof-67.md)
   * [68-Ⅰ 二叉搜索树的最近公共祖先【二叉搜索树性质】](algorithm/lcof/lcof-68-i.md)
-  * [68-Ⅱ 二叉树的最近公共祖先【哈希表、递归+DFS】](algorithm/lcof/lcof-68-ii.md)
+  * [68-Ⅱ 二叉树的最近公共祖先【哈希表/递归+DFS】](algorithm/lcof/lcof-68-ii.md)
 
 ## 计算机网络
 

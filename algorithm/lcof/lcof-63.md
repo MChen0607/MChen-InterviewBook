@@ -23,11 +23,11 @@
 
 **限制：**
 
-* 0 \leq 数组长度 \leq10^5
+* 0 &lt;= 数组长度 &lt;=10^5
 
 ## 2.解题思路
 
-### 2.1 方法一：一次遍历
+### 2.1 方法一：DP
 
 > 使用minprice变量当前数组自己之前可购买的最小价格。
 >
@@ -36,20 +36,21 @@
 #### 代码实现
 
 ```text
- public class Solution {
-     public int maxProfit(int prices[]) {
-         int minprice = Integer.MAX_VALUE;
-         int maxprofit = 0;
-         for (int i = 0; i < prices.length; i++) {
-             if (prices[i] < minprice) {
-                 minprice = prices[i];
-             } else if (prices[i] - minprice > maxprofit) {
-                 maxprofit = prices[i] - minprice;
-             }
-         }
-         return maxprofit;
-     }
- }
+/**
+ * 动态规划
+ */
+public int maxProfit(int prices[]) {
+    int minprice = Integer.MAX_VALUE;
+    int maxprofit = 0;
+    for (int price : prices) {
+        if (price < minprice) {
+            minprice = price;
+        } else if (price - minprice > maxprofit) {
+            maxprofit = price - minprice;
+        }
+    }
+    return maxprofit;
+}
 ```
 
 #### 复杂度分析

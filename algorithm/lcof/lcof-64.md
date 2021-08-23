@@ -31,12 +31,13 @@
 #### 代码实现
 
 ```text
- class Solution {
-     public int sumNums(int n) {
-         boolean flag = n > 0 && (n += sumNums(n - 1)) > 0;
-         return n;
-     }
- }
+/**
+ * 递归
+ */
+public int sumNums(int n) {
+    boolean flag = n > 0 && (n += sumNums(n - 1)) > 0;
+    return n;
+}
 ```
 
 #### 复杂度分析

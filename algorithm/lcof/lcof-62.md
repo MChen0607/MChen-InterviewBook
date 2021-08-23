@@ -1,4 +1,4 @@
-# 62. 圆圈中最后剩下的数字【约瑟夫问题】
+# 62. 圆圈中最后剩下的数字\*【约瑟夫问题】
 
 ## 1.题目描述
 
@@ -25,8 +25,6 @@
 * `1 <= n <= 10^5`
 * `1 <= m <= 10^6`
 
-&lt;!-- more --&gt;
-
 ## 2.解题思路
 
 ### \[约瑟夫问题\]
@@ -35,26 +33,27 @@
 
 #### 递归方程
 
-$$  
-f\(n,m\)=f\(n-1,m\)+m\) \% n  
-$$  
-
+$$
+f(n,m)=(f(n-1,m)+m) \% n
+$$
 
 #### 代码实现
 
 ```text
- public int lastRemaining(int n, int m) {
-     return f(n, m);
- }
- ​
- private int f(int n, int m) {
-     if (n == 1) {
-         return 0;
-     }
-     int x = f(n - 1, m);
-     System.out.println(x);
-     return (m + x) % n;
- }
+/**
+ * 数学+递归
+ */
+public int lastRemaining(int n, int m) {
+    return f(n, m);
+}
+
+private int f(int n, int m) {
+    if (n == 1) {
+        return 0;
+    }
+    int x = f(n - 1, m);
+    return (m + x) % n;
+}
 ```
 
 #### 复杂度分析
@@ -70,13 +69,16 @@ $$
 #### 代码实现
 
 ```text
- public int lastRemaining2(int n, int m) {
-     int f = 0;
-     for (int i = 2; i <= n; ++i) {
-         f = (m + f) % i;
-     }
-     return f;
- }
+/**
+ * 数学+迭代
+ */
+public int lastRemaining2(int n, int m) {
+    int f = 0;
+    for (int i = 2; i <= n; ++i) {
+        f = (m + f) % i;
+    }
+    return f;
+}
 ```
 
 #### 复杂度分析

@@ -25,27 +25,31 @@
 #### 代码实现
 
 ```text
- public int[] constructArr(int[] a) {
-     int len = a.length;
-     if (len == 0) {
-         return new int[0];
-     }
-     int[] left = new int[len];
-     int[] right = new int[len];
-     int[] res = new int[len];
-     left[0] = 1;
-     right[len - 1] = 1;
-     for (int i = 1; i < len; i++) {
-         left[i] = left[i - 1] * a[i - 1];
-     }
-     for (int i = len - 2; i >= 0; i--) {
-         right[i] = right[i + 1] * a[i + 1];
-     }
-     for (int i = 0; i < len; i++) {
-         res[i] = left[i] * right[i];
-     }
-     return res;
- }
+/**
+ * 辅助数组
+ */
+public int[] constructArr(int[] a) {
+    int len = a.length;
+    if (len == 0) {
+        return new int[0];
+    }
+    int[] left = new int[len];
+    int[] right = new int[len];
+    int[] res = new int[len];
+    left[0] = 1;
+    right[len - 1] = 1;
+    for (int i = 1; i < len; i++) {
+        left[i] = left[i - 1] * a[i - 1];
+    }
+    for (int i = len - 2; i >= 0; i--) {
+        right[i] = right[i + 1] * a[i + 1];
+    }
+    for (int i = 0; i < len; i++) {
+        res[i] = left[i] * right[i];
+    }
+    return res;
+}
+
 ```
 
 **复杂度分析**
@@ -59,26 +63,29 @@
 > 优化空间，将left,right数组用一个变量来替代，节省空间开销
 
 ```text
- public int[] constructArr(int[] a) {
-     int len = a.length;
-     if (len == 0) {
-         return new int[0];
-     }
-     int[] res = new int[len];
-     int temp = 1;
-     // 先将left乘积存入res数组中
-     for (int i = 0; i < len; i++) {
-         res[i] = temp;
-         temp = temp * a[i];
-     }
-     // 再将right数组乘以res数组。
-     temp = 1;
-     for (int i = len - 1; i >= 0; i--) {
-         res[i] = res[i] * temp;
-         temp = temp * a[i];
-     }
-     return res;
- }
+/**
+ * 优化
+ */
+public int[] constructArr2(int[] a) {
+    int len = a.length;
+    if (len == 0) {
+        return new int[0];
+    }
+    int[] res = new int[len];
+    int temp = 1;
+    // 先将left乘积存入res数组中
+    for (int i = 0; i < len; i++) {
+        res[i] = temp;
+        temp = temp * a[i];
+    }
+    // 再将right数组乘以res数组。
+    temp = 1;
+    for (int i = len - 1; i >= 0; i--) {
+        res[i] = res[i] * temp;
+        temp = temp * a[i];
+    }
+    return res;
+}
 ```
 
 **复杂度分析**

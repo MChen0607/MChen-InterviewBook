@@ -1,4 +1,4 @@
-# 61. 扑克牌中的顺子【数学、辅助数组】
+# 61. 扑克牌中的顺子【排序/哈希表】
 
 ## 1.题目描述
 
@@ -25,31 +25,62 @@
 
 ## 2.解题思路
 
-### 2.1 方法一：辅助数组
+### 2.1 方法一：排序
+
+> 统计大小王数量，以及判断是否有非大小王外重复的牌。最后比较最大值和最小值的差是否小于等于4即可。
+
+#### 代码实现
+
+```text
+/**
+ * 排序
+ */
+public boolean isStraight(int[] nums) {
+    int joker = 0;
+    Arrays.sort(nums); // 数组排序
+    for (int i = 0; i < 4; i++) {
+        if (nums[i] == 0) { // 统计大小王数量
+            joker++;
+        } else if (nums[i] == nums[i + 1]) { // 若有重复，提前返回 false
+            return false;
+        }
+    }
+    return nums[4] - nums[joker] < 5; // 最大牌 - 最小牌 < 5 则可构成顺子
+}
+```
+
+#### 复杂度分析
+
+> 时间复杂度：O\(n log n\)
+
+> 空间复杂度：O\(1\)
+
+### 2.2 方法二：哈希表
 
 > 使用一个辅助数组来做标记，标记是否已经出现该牌，如果num为0,则跳过，如果出现过则返回false,然后比较得出最大值，最小值。最后比较最大值和最小值的差是否小于等于4即可。
 
 #### 代码实现
 
 ```text
- class Solution61 {
-     public boolean isStraight(int[] nums) {
-         boolean[] flag = new boolean[14];
-         int min = 13, max = 0;
-         for (int num : nums) {
-             if (num == 0) {
-                 continue;
-             }
-             if (flag[num]) {
-                 return false;
-             }
-             max = Math.max(max, num);
-             min = Math.min(min, num);
-             flag[num] = true;
-         }
-         return max - min <= 4;
-     }
- }
+/**
+ * 哈希表
+ */
+public boolean isStraight2(int[] nums) {
+    boolean[] flag = new boolean[14];
+    int min = 13, max = 0;
+    for (int num : nums) {
+        if (num == 0) {
+            continue;
+        }
+        if (flag[num]) {
+            return false;
+        }
+        max = Math.max(max, num);
+        min = Math.min(min, num);
+        flag[num] = true;
+    }
+    return max - min <= 4;
+}
 ```
 
 #### 复杂度分析
