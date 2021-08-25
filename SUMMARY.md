@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Initial page](README.md)
+* [学习书籍整理](books.md)
 
 ## 数据结构与算法 <a id="algorithm"></a>
 
@@ -87,6 +88,7 @@
 ## 计算机网络
 
 * [计算机网络](ji-suan-ji-wang-luo/ji-suan-ji-wang-luo.md)
+* [《图解HTTP》](ji-suan-ji-wang-luo/http.md)
 
 ## 学习进度 <a id="learning-progress"></a>
 
