@@ -91,6 +91,11 @@
 * [《图解HTTP》](ji-suan-ji-wang-luo/http.md)
 * [URL访问过程](ji-suan-ji-wang-luo/url-trace.md)
 
+## 设计模式
+
+* [设计模式](she-ji-mo-shi/she-ji-mo-shi/README.md)
+  * [单例模式](she-ji-mo-shi/she-ji-mo-shi/singleton.md)
+
 ## 学习进度 <a id="learning-progress"></a>
 
 * [学习进度](learning-progress/xue-xi-jin-du.md)
