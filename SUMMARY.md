@@ -89,6 +89,7 @@
 
 * [计算机网络](ji-suan-ji-wang-luo/ji-suan-ji-wang-luo.md)
 * [《图解HTTP》](ji-suan-ji-wang-luo/http.md)
+* [URL访问过程](ji-suan-ji-wang-luo/url-trace.md)
 
 ## 学习进度 <a id="learning-progress"></a>
 
