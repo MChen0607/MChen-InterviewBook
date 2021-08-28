@@ -85,18 +85,25 @@
   * [68-Ⅰ 二叉搜索树的最近公共祖先【二叉搜索树性质】](algorithm/lcof/lcof-68-i.md)
   * [68-Ⅱ 二叉树的最近公共祖先【哈希表/递归+DFS】](algorithm/lcof/lcof-68-ii.md)
 
-## 计算机网络
+## 计算机网络 <a id="computer-network"></a>
 
-* [计算机网络](ji-suan-ji-wang-luo/ji-suan-ji-wang-luo.md)
-* [《图解HTTP》](ji-suan-ji-wang-luo/http.md)
-* [URL访问过程](ji-suan-ji-wang-luo/url-trace.md)
+* [计算机网络](computer-network/network.md)
+* [《图解HTTP》](computer-network/http.md)
+* [URL访问过程](computer-network/url-trace.md)
 
-## 设计模式
+## 设计模式 <a id="design-pattern"></a>
 
-* [设计模式](she-ji-mo-shi/she-ji-mo-shi/README.md)
-  * [单例模式](she-ji-mo-shi/she-ji-mo-shi/singleton.md)
+* [设计模式](design-pattern/design-patterns/README.md)
+  * [单例模式](design-pattern/design-patterns/singleton.md)
+  * [观察者模式](design-pattern/design-patterns/observer.md)
+  * [原型模式](design-pattern/design-patterns/prototype.md)
 
 ## 学习进度 <a id="learning-progress"></a>
 
 * [学习进度](learning-progress/xue-xi-jin-du.md)
+
+## Java
+
+* [Java](java/java/README.md)
+  * [java基础](java/java/java-base.md)
 
