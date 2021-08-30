@@ -95,6 +95,9 @@
 
 * [设计模式](design-pattern/design-patterns/README.md)
   * [单例模式](design-pattern/design-patterns/singleton.md)
+  * [简单工厂模式](design-pattern/design-patterns/simple-factory.md)
+  * [工厂方法模式](design-pattern/design-patterns/factory-method.md)
+  * [抽象工厂模式](design-pattern/design-patterns/abstract-factory.md)
   * [观察者模式](design-pattern/design-patterns/observer.md)
   * [原型模式](design-pattern/design-patterns/prototype.md)
 
