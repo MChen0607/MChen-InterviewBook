@@ -2,7 +2,13 @@
 description: Prepare for the interview
 ---
 
-# Initial page
+# 哈哈哈
 
-初始化界面
+Hello，这里是Chen Min同学为之后面试做准备的GitBook。
+
+尽人事听天命！
+
+爱在华师大！
+
+勤奋学习+健康生活+科学运动！
 

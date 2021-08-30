@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Initial page](README.md)
+* [哈哈哈](README.md)
 * [学习书籍整理](books.md)
 
 ## 数据结构与算法 <a id="algorithm"></a>
