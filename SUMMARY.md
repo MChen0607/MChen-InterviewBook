@@ -84,6 +84,9 @@
   * [67. 把字符串转换成整数【字符串】](algorithm/lcof/lcof-67.md)
   * [68-Ⅰ 二叉搜索树的最近公共祖先【二叉搜索树性质】](algorithm/lcof/lcof-68-i.md)
   * [68-Ⅱ 二叉树的最近公共祖先【哈希表/递归+DFS】](algorithm/lcof/lcof-68-ii.md)
+* [练习](algorithm/practice-1/README.md)
+  * [前缀和](algorithm/practice-1/profix/README.md)
+    * [LC1109.航班预订统计](algorithm/practice-1/profix/lc1109.-hang-ban-yu-ding-tong-ji.md)
 
 ## 计算机网络 <a id="computer-network"></a>
 
