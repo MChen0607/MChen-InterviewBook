@@ -101,8 +101,9 @@
   * [简单工厂模式](design-pattern/design-patterns/simple-factory.md)
   * [工厂方法模式](design-pattern/design-patterns/factory-method.md)
   * [抽象工厂模式](design-pattern/design-patterns/abstract-factory.md)
-  * [观察者模式](design-pattern/design-patterns/observer.md)
+  * [生成器模式](design-pattern/design-patterns/builder.md)
   * [原型模式](design-pattern/design-patterns/prototype.md)
+  * [观察者模式](design-pattern/design-patterns/observer.md)
 
 ## 学习进度 <a id="learning-progress"></a>
 
