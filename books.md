@@ -52,7 +52,7 @@
 
 ### 2.1 MySQL
 
-* [ ] 《MySQL 必知必会》
+* [x] 《MySQL 必知必会》【0914MySQL实践方面】
 * [ ] 《MySQL技术内幕 Innodb存储引擎》
 * [ ] 《高性能MySQL》
 
