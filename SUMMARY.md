@@ -114,3 +114,7 @@
 * [Java](java/java/README.md)
   * [java基础](java/java/java-base.md)
 
+## 数据库
+
+* [MySQL试题](shu-ju-ku/mysql_practice.md)
+
