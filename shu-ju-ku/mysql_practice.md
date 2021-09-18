@@ -269,7 +269,7 @@ where
     );
 ```
 
-## **185. 部门工资前三高的所有员工**
+## **185. 部门工资前三高的所有员工\*\*\***
 
 `Employee` 表包含所有员工信息，每个员工有其对应的工号 `Id`，姓名 `Name`，工资 `Salary` 和部门编号 `DepartmentId` 。
 
@@ -336,7 +336,7 @@ WHERE
                 AND e1.DepartmentId = e2.DepartmentId
         );
 
-# 内库 dense函数     
+# 内库 dense函数  PARTITION BY.
 SELECT Department, Name AS Employee, Salary
 FROM(
     SELECT D.Name AS Department, E.Name AS Name, Salary,
@@ -344,5 +344,201 @@ FROM(
     FROM Employee AS E INNER JOIN Department AS D
     ON E.DepartmentId = D.Id) AS C
 WHERE C.R <= 3;
+```
+
+> rank\(\)内置函数：引入的版本为MySQL8.0 [https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html\#function\_dense-rank](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_dense-rank)
+
+## **182. 查找重复的电子邮箱**
+
+编写一个 SQL 查询，查找 `Person` 表中所有重复的电子邮箱。
+
+**示例：**
+
+```text
++----+---------+
+| Id | Email   |
++----+---------+
+| 1  | a@b.com |
+| 2  | c@d.com |
+| 3  | a@b.com |
++----+---------+
+```
+
+根据以上输入，你的查询应返回以下结果：
+
+```text
++---------+
+| Email   |
++---------+
+| a@b.com |
++---------+
+```
+
+**说明：**所有电子邮箱都是小写字母。
+
+### 解答
+
+```text
+# where子句
+Select DISTINCT
+    a.Email
+FROM
+    Person AS a,Person AS b
+Where
+    a.id != b.id
+    and a.Email = b.Email;
+
+# 内部联结
+Select DISTINCT
+    a.Email
+FROM
+    Person AS a inner join Person AS b on 
+        a.id != b.id
+        and a.Email = b.Email;
+
+#分组
+select
+    email 
+from
+    person
+group by 
+    email
+having 
+    count(email) > 1;
+    
+# 临时表
+SELECT
+	Email 
+FROM
+	( SELECT Email, count( Email ) AS num FROM Person GROUP BY Email ) AS statistic 
+WHERE
+	num > 1;
+```
+
+
+
+## **183. 从不订购的客户\***
+
+某网站包含两个表，`Customers` 表和 `Orders` 表。编写一个 SQL 查询，找出所有从不订购任何东西的客户。
+
+`Customers` 表：
+
+```text
++----+-------+
+| Id | Name  |
++----+-------+
+| 1  | Joe   |
+| 2  | Henry |
+| 3  | Sam   |
+| 4  | Max   |
++----+-------+
+```
+
+`Orders` 表：
+
+```text
++----+------------+
+| Id | CustomerId |
++----+------------+
+| 1  | 3          |
+| 2  | 1          |
++----+------------+
+```
+
+例如给定上述表格，你的查询应返回：
+
+```text
++-----------+
+| Customers |
++-----------+
+| Henry     |
+| Max       |
++-----------+
+```
+
+### 解答
+
+```text
+# 左连接
+SELECT 
+	NAME AS Customers 
+FROM
+	( SELECT Customers.NAME, Orders.Id 
+		FROM Customers LEFT JOIN Orders ON 
+			Customers.Id = Orders.CustomerId 
+	) AS n 
+WHERE
+	n.Id IS NULL;
+	
+
+
+SELECT 
+	NAME AS Customers 
+FROM
+	Customers 
+WHERE
+	Customers.Id NOT IN ( SELECT Orders.CustomerId FROM Orders );
+```
+
+
+
+## **180. 连续出现的数字\*\*\***
+
+表：`Logs`
+
+```text
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| id          | int     |
+| num         | varchar |
++-------------+---------+
+id 是这个表的主键。
+```
+
+编写一个 SQL 查询，查找所有至少连续出现三次的数字。
+
+返回的结果表中的数据可以按 **任意顺序** 排列。
+
+查询结果格式如下面的例子所示：
+
+```text
+Logs 表：
++----+-----+
+| Id | Num |
++----+-----+
+| 1  | 1   |
+| 2  | 1   |
+| 3  | 1   |
+| 4  | 2   |
+| 5  | 1   |
+| 6  | 2   |
+| 7  | 2   |
++----+-----+
+
+Result 表：
++-----------------+
+| ConsecutiveNums |
++-----------------+
+| 1               |
++-----------------+
+1 是唯一连续出现至少三次的数字。
+```
+
+### 解答
+
+```text
+# 三个表联结
+SELECT DISTINCT
+	l1.Num AS ConsecutiveNums 
+FROM
+	LOGS l1,
+	LOGS l2,
+	LOGS l3 
+WHERE
+	l1.Id = l2.Id - 1 
+	AND l2.Id = l3.Id - 1 
+	AND l1.Num = l2.Num 
+	AND l2.Num = l3.Num;
 ```
 
