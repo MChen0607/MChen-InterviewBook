@@ -158,6 +158,108 @@ SELECT
 
 
 
+## **177. 第N高的薪水**
+
+编写一个 SQL 查询，获取 `Employee` 表中第 _n_ 高的薪水（Salary）。
+
+```text
++----+--------+
+| Id | Salary |
++----+--------+
+| 1  | 100    |
+| 2  | 200    |
+| 3  | 300    |
++----+--------+
+```
+
+例如上述 `Employee` 表，_n = 2_ 时，应返回第二高的薪水 `200`。如果不存在第 _n_ 高的薪水，那么查询应返回 `null`。
+
+```text
++------------------------+
+| getNthHighestSalary(2) |
++------------------------+
+| 200                    |
++------------------------+
+```
+
+### 解答
+
+```text
+# 窗口函数 370ms
+CREATE FUNCTION getNthHighestSalary ( N INT ) RETURNS INT BEGIN
+	RETURN (
+		# Write your MySQL query statement below.
+		SELECT
+			(
+				SELECT DISTINCT 
+					Salary 
+				FROM ( 
+					SELECT 
+						Salary, 
+						dense_rank() over ( ORDER BY Salary DESC ) AS R 
+					FROM Employee 
+				) AS t
+				WHERE 
+				t.R = N 
+			) 
+		);
+END
+
+# GROUP BY  371ms
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+    SET N := N-1;
+  RETURN (
+      # Write your MySQL query statement below.
+      SELECT 
+            salary
+      FROM 
+            employee
+      GROUP BY 
+            salary
+      ORDER BY 
+            salary DESC
+      LIMIT N, 1
+  );
+END
+# where子句  749ms
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+  RETURN (
+      # Write your MySQL query statement below.
+      SELECT 
+          DISTINCT e.salary
+      FROM 
+          employee e
+      WHERE 
+          (SELECT count(DISTINCT salary) FROM employee WHERE salary>e.salary) = N-1
+  );
+END
+
+#自定义变量 *****
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+  RETURN (
+      # Write your MySQL query statement below.
+      SELECT 
+          DISTINCT salary 
+      FROM 
+          (SELECT 
+                salary, @r:=IF(@p=salary, @r, @r+1) AS rnk,  @p:= salary 
+            FROM  
+                employee, (SELECT @r:=0, @p:=NULL)init 
+            ORDER BY 
+                salary DESC) tmp
+      WHERE rnk = N
+  );
+END
+
+作者：luanhz
+链接：https://leetcode-cn.com/problems/nth-highest-salary/solution/mysql-zi-ding-yi-bian-liang-by-luanz/
+```
+
+
+
 ## **181. 超过经理收入的员工**
 
 `Employee` 表包含所有员工，他们的经理也属于员工。每个员工都有一个 Id，此外还有一列对应员工的经理的 Id。
@@ -541,4 +643,58 @@ WHERE
 	AND l1.Num = l2.Num 
 	AND l2.Num = l3.Num;
 ```
+
+
+
+## **596. 超过5名学生的课**
+
+有一个`courses` 表 ，有: **student \(学生\)** 和 **class \(课程\)**。
+
+请列出所有超过或等于5名学生的课。
+
+例如，表：
+
+```text
++---------+------------+
+| student | class      |
++---------+------------+
+| A       | Math       |
+| B       | English    |
+| C       | Math       |
+| D       | Biology    |
+| E       | Math       |
+| F       | Computer   |
+| G       | Math       |
+| H       | Math       |
+| I       | Math       |
++---------+------------+
+```
+
+应该输出:
+
+```text
++---------+
+| class   |
++---------+
+| Math    |
++---------+
+```
+
+**提示：**
+
+* 学生在每个课中不应被重复计算。
+
+### 解答
+
+```text
+Select
+    class
+FROM
+    courses
+Group by
+    class
+Having count(DISTINCT student) >= 5;
+```
+
+
 
