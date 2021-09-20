@@ -1,3 +1,8 @@
+---
+description: >-
+  leetcode数据库试题：https://leetcode-cn.com/problemset/database/?sorting=W3sic29ydE9yZGVyIjoiREVTQ0VORElORyIsIm9yZGVyQnkiOiJTT0xVVElPTl9OVU0ifV0%3D
+---
+
 # MySQL试题
 
 ## **178. 分数排名 \*\*\***
@@ -57,7 +62,8 @@ from scores;
 
 ```text
 select
-    score as "Score",dense_rank() over (order by score desc) as "Rank" 
+    score as "Score",
+    dense_rank() over (order by score desc) as "Rank" 
 from
     scores;
 ```
@@ -819,7 +825,7 @@ WHERE
 
 ### 
 
-## **601. 体育馆的人流量**
+## **601. 体育馆的人流量 \*\*\*\***
 
 ```text
 +---------------+---------+
@@ -876,11 +882,16 @@ id 为 5、6、7、8 的四行 id 连续，并且每行都有 >= 100 的人数�
 select id, visit_date, people from
 (
 -- 计算id减去下标后出现的重复次数
-select *,count(*) over (PARTITION by templete.oder) as oder2
+select 
+	*,
+	count(*) over (PARTITION by templete.oder) as oder2
 from 
 		(
 		-- 用id减去数据下标值，如果id连续中断id减下标的值会增大否则都相同
-		select *,row_number() over(order by id asc) as `rank`,id - row_number() over(order by id asc) as `oder`
+		select 
+			*,
+			row_number() over(order by id asc) as `rank`,
+			id - row_number() over(order by id asc) as `oder`
 		from (
 					-- 查出人数大于等于100的数据
 					select * 
@@ -910,5 +921,458 @@ WHERE
 	) 
 ORDER BY
 	t1.id;
+```
+
+
+
+## **262. 行程和用户\*\*\***
+
+表：`Trips`
+
+```text
++-------------+----------+
+| Column Name | Type     |
++-------------+----------+
+| Id          | int      |
+| Client_Id   | int      |
+| Driver_Id   | int      |
+| City_Id     | int      |
+| Status      | enum     |
+| Request_at  | date     |     
++-------------+----------+
+Id 是这张表的主键。
+这张表中存所有出租车的行程信息。每段行程有唯一 Id ，其中 Client_Id 和 Driver_Id 是 Users 表中 Users_Id 的外键。
+Status 是一个表示行程状态的枚举类型，枚举成员为(‘completed’, ‘cancelled_by_driver’, ‘cancelled_by_client’) 。
+```
+
+表：`Users`
+
+```text
++-------------+----------+
+| Column Name | Type     |
++-------------+----------+
+| Users_Id    | int      |
+| Banned      | enum     |
+| Role        | enum     |
++-------------+----------+
+Users_Id 是这张表的主键。
+这张表中存所有用户，每个用户都有一个唯一的 Users_Id ，Role 是一个表示用户身份的枚举类型，枚举成员为 (‘client’, ‘driver’, ‘partner’) 。
+Banned 是一个表示用户是否被禁止的枚举类型，枚举成员为 (‘Yes’, ‘No’) 。
+```
+
+写一段 SQL 语句查出 `"2013-10-01"` ****至 `"2013-10-03"` ****期间非禁止用户（**乘客和司机都必须未被禁止**）的取消率。非禁止用户即 Banned 为 No 的用户，禁止用户即 Banned 为 Yes 的用户。
+
+**取消率** 的计算方式如下：\(被司机或乘客取消的非禁止用户生成的订单数量\) / \(非禁止用户生成的订单总数\)。
+
+返回结果表中的数据可以按任意顺序组织。其中取消率 `Cancellation Rate` 需要四舍五入保留 **两位小数** 。
+
+查询结果格式如下例所示：
+
+```text
+Trips 表：
++----+-----------+-----------+---------+---------------------+------------+
+| Id | Client_Id | Driver_Id | City_Id | Status              | Request_at |
++----+-----------+-----------+---------+---------------------+------------+
+| 1  | 1         | 10        | 1       | completed           | 2013-10-01 |
+| 2  | 2         | 11        | 1       | cancelled_by_driver | 2013-10-01 |
+| 3  | 3         | 12        | 6       | completed           | 2013-10-01 |
+| 4  | 4         | 13        | 6       | cancelled_by_client | 2013-10-01 |
+| 5  | 1         | 10        | 1       | completed           | 2013-10-02 |
+| 6  | 2         | 11        | 6       | completed           | 2013-10-02 |
+| 7  | 3         | 12        | 6       | completed           | 2013-10-02 |
+| 8  | 2         | 12        | 12      | completed           | 2013-10-03 |
+| 9  | 3         | 10        | 12      | completed           | 2013-10-03 |
+| 10 | 4         | 13        | 12      | cancelled_by_driver | 2013-10-03 |
++----+-----------+-----------+---------+---------------------+------------+
+
+Users 表：
++----------+--------+--------+
+| Users_Id | Banned | Role   |
++----------+--------+--------+
+| 1        | No     | client |
+| 2        | Yes    | client |
+| 3        | No     | client |
+| 4        | No     | client |
+| 10       | No     | driver |
+| 11       | No     | driver |
+| 12       | No     | driver |
+| 13       | No     | driver |
++----------+--------+--------+
+
+Result 表：
++------------+-------------------+
+| Day        | Cancellation Rate |
++------------+-------------------+
+| 2013-10-01 | 0.33              |
+| 2013-10-02 | 0.00              |
+| 2013-10-03 | 0.50              |
++------------+-------------------+
+
+2013-10-01：
+  - 共有 4 条请求，其中 2 条取消。
+  - 然而，Id=2 的请求是由禁止用户（User_Id=2）发出的，所以计算时应当忽略它。
+  - 因此，总共有 3 条非禁止请求参与计算，其中 1 条取消。
+  - 取消率为 (1 / 3) = 0.33
+2013-10-02：
+  - 共有 3 条请求，其中 0 条取消。
+  - 然而，Id=6 的请求是由禁止用户发出的，所以计算时应当忽略它。
+  - 因此，总共有 2 条非禁止请求参与计算，其中 0 条取消。
+  - 取消率为 (0 / 2) = 0.00
+2013-10-03：
+  - 共有 3 条请求，其中 1 条取消。
+  - 然而，Id=8 的请求是由禁止用户发出的，所以计算时应当忽略它。
+  - 因此，总共有 2 条非禁止请求参与计算，其中 1 条取消。
+  - 取消率为 (1 / 2) = 0.50
+```
+
+### 解答
+
+```text
+SELECT
+	T.request_at AS `Day`,
+	ROUND( SUM( IF ( T.STATUS = 'completed', 0, 1 ) ) / COUNT( T.STATUS ), 2 ) AS `Cancellation Rate` 
+FROM
+	trips AS T 
+WHERE
+	T.Client_Id NOT IN ( SELECT users_id FROM users WHERE banned = 'Yes' ) 
+	AND T.Driver_Id NOT IN ( SELECT users_id FROM users WHERE banned = 'Yes' ) 
+	AND T.request_at BETWEEN '2013-10-01' 
+	AND '2013-10-03' 
+GROUP BY
+	T.request_at;
+	
+
+SELECT T.request_at AS `Day`, 
+	ROUND(
+			SUM(
+				IF(T.STATUS = 'completed',0,1)
+			)
+			/ 
+			COUNT(T.STATUS),
+			2
+	) AS `Cancellation Rate`
+FROM Trips AS T
+JOIN Users AS U1 ON (T.client_id = U1.users_id AND U1.banned ='No')
+JOIN Users AS U2 ON (T.driver_id = U2.users_id AND U2.banned ='No')
+WHERE T.request_at BETWEEN '2013-10-01' AND '2013-10-03'
+GROUP BY T.request_at;
+```
+
+### 
+
+## **627. 变更性别**
+
+给定一个 `salary` 表，如下所示，有 m = 男性 和 f = 女性 的值。交换所有的 f 和 m 值（例如，将所有 f 值更改为 m，反之亦然）。要求只使用一个更新（Update）语句，并且没有中间的临时表。
+
+注意，您必只能写一个 Update 语句，请不要编写任何 Select 语句。
+
+**例如：**
+
+```text
+| id | name | sex | salary |
+|----|------|-----|--------|
+| 1  | A    | m   | 2500   |
+| 2  | B    | f   | 1500   |
+| 3  | C    | m   | 5500   |
+| 4  | D    | f   | 500    |
+```
+
+运行你所编写的更新语句之后，将会得到以下表:
+
+```text
+| id | name | sex | salary |
+|----|------|-----|--------|
+| 1  | A    | f   | 2500   |
+| 2  | B    | m   | 1500   |
+| 3  | C    | f   | 5500   |
+| 4  | D    | m   | 500    |
+```
+
+### 解答
+
+```text
+# IF
+UPDATE salary 
+SET sex = IF( sex = 'm', 'f', 'm' );
+
+# CASE THEN
+UPDATE salary
+SET
+    sex = 
+        CASE sex
+            WHEN 'm' THEN 'f'
+            ELSE 'm'
+        END;
+```
+
+
+
+## **620. 有趣的电影**
+
+某城市开了一家新的电影院，吸引了很多人过来看电影。该电影院特别注意用户体验，专门有个 LED显示板做电影推荐，上面公布着影评和相关电影描述。
+
+作为该电影院的信息部主管，您需要编写一个 SQL查询，找出所有影片描述为**非** `boring` \(不无聊\) 的并且 **id 为奇数** 的影片，结果请按等级 `rating` 排列。
+
+例如，下表 `cinema`:
+
+```text
++---------+-----------+--------------+-----------+
+|   id    | movie     |  description |  rating   |
++---------+-----------+--------------+-----------+
+|   1     | War       |   great 3D   |   8.9     |
+|   2     | Science   |   fiction    |   8.5     |
+|   3     | irish     |   boring     |   6.2     |
+|   4     | Ice song  |   Fantacy    |   8.6     |
+|   5     | House card|   Interesting|   9.1     |
++---------+-----------+--------------+-----------+
+```
+
+对于上面的例子，则正确的输出是为：
+
+```text
++---------+-----------+--------------+-----------+
+|   id    | movie     |  description |  rating   |
++---------+-----------+--------------+-----------+
+|   5     | House card|   Interesting|   9.1     |
+|   1     | War       |   great 3D   |   8.9     |
++---------+-----------+--------------+-----------+
+```
+
+### 解答
+
+```text
+select
+    id,
+    movie,
+    description,
+    rating
+FROM
+    cinema
+where
+    id % 2 = 1
+    and description != 'boring'
+order by
+    rating DESC;
+
+# mod()
+select
+    id,
+    movie,
+    description,
+    rating
+FROM
+    cinema
+where
+    mod(id, 2) = 1
+    and description != 'boring'
+order by
+    rating DESC;
+```
+
+
+
+## **595. 大的国家**
+
+这里有张 `World` 表
+
+```text
++-----------------+------------+------------+--------------+---------------+
+| name            | continent  | area       | population   | gdp           |
++-----------------+------------+------------+--------------+---------------+
+| Afghanistan     | Asia       | 652230     | 25500100     | 20343000      |
+| Albania         | Europe     | 28748      | 2831741      | 12960000      |
+| Algeria         | Africa     | 2381741    | 37100000     | 188681000     |
+| Andorra         | Europe     | 468        | 78115        | 3712000       |
+| Angola          | Africa     | 1246700    | 20609294     | 100990000     |
++-----------------+------------+------------+--------------+---------------+
+```
+
+如果一个国家的面积超过 300 万平方公里，或者人口超过 2500 万，那么这个国家就是大国家。
+
+编写一个 SQL 查询，输出表中所有大国家的名称、人口和面积。
+
+例如，根据上表，我们应该输出:
+
+```text
++--------------+-------------+--------------+
+| name         | population  | area         |
++--------------+-------------+--------------+
+| Afghanistan  | 25500100    | 652230       |
+| Algeria      | 37100000    | 2381741      |
++--------------+-------------+--------------+
+```
+
+### 解答
+
+```text
+Select
+    name,
+    population,
+    area
+FROM
+    World
+where
+    area >= 3000000
+    or population >= 25000000;
+
+# UNION
+SELECT
+    name, population, area
+FROM
+    world
+WHERE
+    area > 3000000
+
+UNION
+
+SELECT
+    name, population, area
+FROM
+    world
+WHERE
+    population > 25000000;
+```
+
+
+
+## **1179. 重新格式化部门表\***
+
+部门表 `Department`：
+
+```text
++---------------+---------+
+| Column Name   | Type    |
++---------------+---------+
+| id            | int     |
+| revenue       | int     |
+| month         | varchar |
++---------------+---------+
+(id, month) 是表的联合主键。
+这个表格有关于每个部门每月收入的信息。
+月份（month）可以取下列值 ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]。
+```
+
+编写一个 SQL 查询来重新格式化表，使得新的表中有一个部门 id 列和一些对应 **每个月** 的收入（revenue）列。
+
+查询结果格式如下面的示例所示：
+
+```text
+Department 表：
++------+---------+-------+
+| id   | revenue | month |
++------+---------+-------+
+| 1    | 8000    | Jan   |
+| 2    | 9000    | Jan   |
+| 3    | 10000   | Feb   |
+| 1    | 7000    | Feb   |
+| 1    | 6000    | Mar   |
++------+---------+-------+
+
+查询得到的结果表：
++------+-------------+-------------+-------------+-----+-------------+
+| id   | Jan_Revenue | Feb_Revenue | Mar_Revenue | ... | Dec_Revenue |
++------+-------------+-------------+-------------+-----+-------------+
+| 1    | 8000        | 7000        | 6000        | ... | null        |
+| 2    | 9000        | null        | null        | ... | null        |
+| 3    | null        | 10000       | null        | ... | null        |
++------+-------------+-------------+-------------+-----+-------------+
+
+注意，结果表有 13 列 (1个部门 id 列 + 12个月份的收入列)。
+```
+
+### 解答
+
+```text
+select id,
+    sum(case month when 'Jan' then revenue end) as Jan_Revenue,
+    sum(case month when 'Feb' then revenue end) as Feb_Revenue,
+    sum(case month when 'Mar' then revenue end) as Mar_Revenue,
+    sum(case month when 'Apr' then revenue end) as Apr_Revenue,
+    sum(case month when 'May' then revenue end) as May_Revenue,
+    sum(case month when 'Jun' then revenue end) as Jun_Revenue,
+    sum(case month when 'Jul' then revenue end) as Jul_Revenue,
+    sum(case month when 'Aug' then revenue end) as Aug_Revenue,
+    sum(case month when 'Sep' then revenue end) as Sep_Revenue,
+    sum(case month when 'Oct' then revenue end) as Oct_Revenue,
+    sum(case month when 'Nov' then revenue end) as Nov_Revenue,
+    sum(case month when 'Dec' then revenue end) as Dec_Revenue
+from Department
+group by id
+order by id;
+```
+
+## **626. 换座位\***
+
+小美是一所中学的信息科技老师，她有一张 `seat` 座位表，平时用来储存学生名字和与他们相对应的座位 id。
+
+其中纵列的 **id** 是连续递增的
+
+小美想改变相邻俩学生的座位。
+
+你能不能帮她写一个 SQL query 来输出小美想要的结果呢？
+
+**示例：**
+
+```text
++---------+---------+
+|    id   | student |
++---------+---------+
+|    1    | Abbot   |
+|    2    | Doris   |
+|    3    | Emerson |
+|    4    | Green   |
+|    5    | Jeames  |
++---------+---------+
+```
+
+假如数据输入的是上表，则输出结果如下：
+
+```text
++---------+---------+
+|    id   | student |
++---------+---------+
+|    1    | Doris   |
+|    2    | Abbot   |
+|    3    | Green   |
+|    4    | Emerson |
+|    5    | Jeames  |
++---------+---------+
+```
+
+**注意：**
+
+如果学生人数是奇数，则不需要改变最后一个同学的座位。
+
+### 解答
+
+```text
+SELECT
+    (CASE
+        WHEN MOD(id, 2) != 0 AND counts != id THEN id + 1
+        WHEN MOD(id, 2) != 0 AND counts = id THEN id
+        ELSE id - 1
+    END) AS id,
+    student
+FROM
+    seat,
+    (SELECT
+        COUNT(*) AS counts
+    FROM
+        seat) AS seat_counts
+ORDER BY id ;
+
+SELECT
+	IF
+		(
+			id % 2 = 1 AND counts != id,
+			id + 1,
+			IF ( id % 2 = 1 AND counts = id, id, id - 1 ) 
+		) AS id,
+	student 
+FROM
+		seat,
+		( SELECT COUNT(*) AS counts FROM seat ) AS seat_counts 
+ORDER BY
+	id;
 ```
 
