@@ -698,3 +698,217 @@ Having count(DISTINCT student) >= 5;
 
 
 
+## **197. 上升的温度**
+
+表 `Weather`
+
+```text
++---------------+---------+
+| Column Name   | Type    |
++---------------+---------+
+| id            | int     |
+| recordDate    | date    |
+| temperature   | int     |
++---------------+---------+
+id 是这个表的主键
+该表包含特定日期的温度信息
+```
+
+编写一个 SQL 查询，来查找与之前（昨天的）日期相比温度更高的所有日期的 `id` 。
+
+返回结果 **不要求顺序** 。
+
+查询结果格式如下例：
+
+```text
+Weather
++----+------------+-------------+
+| id | recordDate | Temperature |
++----+------------+-------------+
+| 1  | 2015-01-01 | 10          |
+| 2  | 2015-01-02 | 25          |
+| 3  | 2015-01-03 | 20          |
+| 4  | 2015-01-04 | 30          |
++----+------------+-------------+
+
+Result table:
++----+
+| id |
++----+
+| 2  |
+| 4  |
++----+
+2015-01-02 的温度比前一天高（10 -> 25）
+2015-01-04 的温度比前一天高（20 -> 30）
+```
+
+### 解答
+
+```text
+# datediff时间内置函数
+SELECT
+	W1.id AS Id 
+FROM
+	Weather W1
+	JOIN Weather W2 ON datediff( W1.recordDate, W2.recordDate ) = 1 
+	AND W1.temperature > W2.temperature;
+```
+
+
+
+## **196. 删除重复的电子邮箱\*\*\***
+
+编写一个 SQL 查询，来删除 `Person` 表中所有重复的电子邮箱，重复的邮箱里只保留 **Id** _最小_ 的那个。
+
+```text
++----+------------------+
+| Id | Email            |
++----+------------------+
+| 1  | john@example.com |
+| 2  | bob@example.com  |
+| 3  | john@example.com |
++----+------------------+
+Id 是这个表的主键。
+```
+
+例如，在运行你的查询语句之后，上面的 `Person` 表应返回以下几行:
+
+```text
++----+------------------+
+| Id | Email            |
++----+------------------+
+| 1  | john@example.com |
+| 2  | bob@example.com  |
++----+------------------+
+```
+
+**提示：**
+
+* 执行 SQL 之后，输出是整个 `Person` 表。
+* 使用 `delete` 语句。
+
+### 解答
+
+```text
+# where子句****
+DELETE p1 
+FROM
+	Person p1,
+	Person p2 
+WHERE
+	p1.Email = p2.Email 
+	AND p1.Id > p2.Id;
+
+# IN语句
+DELETE 
+FROM
+	Person 
+WHERE
+	Id NOT IN ( 
+		SELECT 
+			t.Id 
+		FROM ( 
+			SELECT 
+				Email, min( Id ) AS Id 
+			FROM 
+				Person 
+			GROUP BY Email 
+		) AS t 
+	);
+```
+
+### 
+
+## **601. 体育馆的人流量**
+
+```text
++---------------+---------+
+| Column Name   | Type    |
++---------------+---------+
+| id            | int     |
+| visit_date    | date    |
+| people        | int     |
++---------------+---------+
+visit_date 是表的主键
+每日人流量信息被记录在这三列信息中：序号 (id)、日期 (visit_date)、 人流量 (people)
+每天只有一行记录，日期随着 id 的增加而增加
+```
+
+编写一个 SQL 查询以找出每行的人数大于或等于 `100` 且 `id` 连续的三行或更多行记录。
+
+返回按 `visit_date` 升序排列的结果表。
+
+查询结果格式如下所示。
+
+```text
+Stadium table:
++------+------------+-----------+
+| id   | visit_date | people    |
++------+------------+-----------+
+| 1    | 2017-01-01 | 10        |
+| 2    | 2017-01-02 | 109       |
+| 3    | 2017-01-03 | 150       |
+| 4    | 2017-01-04 | 99        |
+| 5    | 2017-01-05 | 145       |
+| 6    | 2017-01-06 | 1455      |
+| 7    | 2017-01-07 | 199       |
+| 8    | 2017-01-09 | 188       |
++------+------------+-----------+
+
+Result table:
++------+------------+-----------+
+| id   | visit_date | people    |
++------+------------+-----------+
+| 5    | 2017-01-05 | 145       |
+| 6    | 2017-01-06 | 1455      |
+| 7    | 2017-01-07 | 199       |
+| 8    | 2017-01-09 | 188       |
++------+------------+-----------+
+id 为 5、6、7、8 的四行 id 连续，并且每行都有 >= 100 的人数记录。
+请注意，即使第 7 行和第 8 行的 visit_date 不是连续的，输出也应当包含第 8 行，因为我们只需要考虑 id 连续的记录。
+不输出 id 为 2 和 3 的行，因为至少需要三条 id 连续的记录。
+```
+
+### 解答
+
+```text
+-- 查出下标重复次数大于等于3的数据
+select id, visit_date, people from
+(
+-- 计算id减去下标后出现的重复次数
+select *,count(*) over (PARTITION by templete.oder) as oder2
+from 
+		(
+		-- 用id减去数据下标值，如果id连续中断id减下标的值会增大否则都相同
+		select *,row_number() over(order by id asc) as `rank`,id - row_number() over(order by id asc) as `oder`
+		from (
+					-- 查出人数大于等于100的数据
+					select * 
+					from stadium
+					where people >= 100
+					) as s1) as templete
+) templete2
+-- 下标重复次数大于等于3的数据
+where templete2.oder2 >= 3
+
+
+# Write your MySQL query statement below
+SELECT DISTINCT
+	t1.*
+FROM
+	stadium t1,
+	stadium t2,
+	stadium t3 
+WHERE
+	t1.people >= 100 
+	AND t2.people >= 100 
+	AND t3.people >= 100 
+	AND (        
+		( t1.id - t2.id = 1 AND t1.id - t3.id = 2 AND t2.id - t3.id = 1 ) -- t1, t2, t3		
+		OR ( t2.id - t1.id = 1 AND t2.id - t3.id = 2 AND t1.id - t3.id = 1 ) -- t2, t1, t3	
+		OR ( t3.id - t2.id = 1 AND t2.id - t1.id = 1 AND t3.id - t1.id = 2 ) -- t3, t2, t1		
+	) 
+ORDER BY
+	t1.id;
+```
+
