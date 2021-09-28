@@ -110,8 +110,8 @@
 * [Java](java/java/README.md)
   * [java基础](java/java/java-base.md)
   * [java虚拟机](java/java/jvm/README.md)
-    * [Java 内存区域](java/java/jvm/java-nei-cun-qu-yu.md)
-    * [垃圾收集器与内存分配策略](java/java/jvm/la-ji-shou-ji-qi-yu-nei-cun-fen-pei-ce-lve.md)
+    * [Java 内存区域](java/java/jvm/memory-area.md)
+    * [垃圾收集器与内存分配策略](java/java/jvm/gc.md)
 
 ## 数据库
 
