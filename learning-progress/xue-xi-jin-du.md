@@ -76,6 +76,12 @@
 
 近期练习Leetcode--mysql书写试题。
 
+## 2021-9-22
+
+截止目前写完20题Leetcode中MySQL的题。
+
+* [ ]  开始看JVM书籍
+
 
 
 
