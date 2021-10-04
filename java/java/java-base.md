@@ -1,5 +1,20 @@
 # java基础
 
+## 
+
+## String, StringBuffer and StringBuilder
+
+**1. 可变性**
+
+* String 不可变
+* StringBuffer 和 StringBuilder 可变
+
+**2. 线程安全**
+
+* String 不可变，因此是线程安全的
+* StringBuilder 不是线程安全的
+* StringBuffer 是线程安全的，内部使用 synchronized 进行同步
+
 ## 7.反射
 
 每个类都有一个 **Class** 对象，包含了与类有关的信息。当编译一个新类时，会产生一个同名的 .class 文件，该文件内容保存着 Class 对象。
