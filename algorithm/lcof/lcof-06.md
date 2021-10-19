@@ -6,11 +6,11 @@
 
 **示例 1：**
 
-> 输入：head = \[1,3,2\] 输出：\[2,3,1\]
+> 输入：head = \[1,3,2] 输出：\[2,3,1]
 
 **限制：**
 
-> 0 &lt;= 链表长度 &lt;= 10000
+> 0 <= 链表长度 <= 10000
 
 ## 2.解题思路
 
@@ -20,7 +20,7 @@
 
 #### 代码实现
 
-```text
+```
  public int[] reversePrint(ListNode head) {
      ArrayList<Integer> tmp = new ArrayList<Integer>();
      recur(head,tmp);
@@ -38,9 +38,9 @@
 
 #### 复杂度分析
 
-> 时间复杂度：O\(n\)
+> 时间复杂度：O(n)
 >
-> 空间复杂度：O\(n\)
+> 空间复杂度：O(n)
 
 ### 2.2 方法二：两次遍历
 
@@ -48,7 +48,7 @@
 
 #### 代码实现
 
-```text
+```
  public int[] reversePrint2(ListNode head) {
      if(head==null){
          return new int [0];
@@ -73,9 +73,9 @@
 
 #### 复杂度分析
 
-> 时间复杂度：O\(n\)
+> 时间复杂度：O(n)
 >
-> 空间复杂度：O\(n\)
+> 空间复杂度：O(n)
 
 ### 2.3 方法三：辅助栈
 
@@ -83,7 +83,7 @@
 
 #### 代码实现
 
-```text
+```
  public int[] reversePrint3(ListNode head) {
      Stack<Integer> stack =new Stack<>();
      while(head!=null){
@@ -100,12 +100,11 @@
 
 #### 复杂度分析
 
-> 时间复杂度：O\(n\)
+> 时间复杂度：O(n)
 >
-> 空间复杂度：O\(n\)
+> 空间复杂度：O(n)
 
 ## 参考
 
 * [https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof](https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof)
-* [https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/solution/mian-shi-ti-06-cong-wei-dao-tou-da-yin-lian-biao-d/](https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/solution/mian-shi-ti-06-cong-wei-dao-tou-da-yin-lian-biao-d/) 
-
+* [https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/solution/mian-shi-ti-06-cong-wei-dao-tou-da-yin-lian-biao-d/](https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/solution/mian-shi-ti-06-cong-wei-dao-tou-da-yin-lian-biao-d/)\

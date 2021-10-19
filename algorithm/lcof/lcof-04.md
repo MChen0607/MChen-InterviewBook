@@ -8,7 +8,7 @@
 
 现有矩阵 matrix 如下：
 
-> \[ \[1, 4, 7, 11, 15\], \[2, 5, 8, 12, 19\], \[3, 6, 9, 16, 22\], \[10, 13, 14, 17, 24\], \[18, 21, 23, 26, 30\] \]
+> \[ \[1, 4, 7, 11, 15], \[2, 5, 8, 12, 19], \[3, 6, 9, 16, 22], \[10, 13, 14, 17, 24], \[18, 21, 23, 26, 30] ]
 
 给定 target = 5，返回 true。
 
@@ -16,9 +16,9 @@
 
 **限制：**
 
-0 &lt;= n &lt;= 1000
+0 <= n <= 1000
 
-0 &lt;= m &lt;= 1000
+0 <= m <= 1000
 
 ## 2.解题思路
 
@@ -28,7 +28,7 @@
 
 #### 代码实现
 
-```text
+```
  public boolean findNumberIn2DArray(int[][] matrix, int target) {
      if (matrix.length == 0 || matrix[0].length == 0) {
          return false;
@@ -47,9 +47,9 @@
 
 #### 复杂度分析
 
-> 时间复杂度 O\(mn\) 双重循环
+> 时间复杂度 O(mn) 双重循环
 >
-> 空间复杂度 O\(1\)
+> 空间复杂度 O(1)
 
 ### 2.2 方法二：线性查找【二叉排序树】
 
@@ -59,7 +59,7 @@
 >
 > 利用这个规律：
 >
-> 初始化起点：矩阵左上角点\(0,n-1\)。
+> 初始化起点：矩阵左上角点(0,n-1)。
 >
 > 如果结点值 等于 target : return true
 >
@@ -69,7 +69,7 @@
 
 #### 代码实现
 
-```text
+```
  public boolean findNumberIn2DArray2(int[][] matrix, int target) {
      if(matrix==null||matrix.length==0||matrix[0].length==0){
          return false;
@@ -92,13 +92,12 @@
 
 #### 复杂度分析
 
-> 时间复杂度O\(m+n\) 最差情况，从矩阵右上角到左下角。
+> 时间复杂度O(m+n) 最差情况，从矩阵右上角到左下角。
 >
-> 空间复杂度O\(1\)
+> 空间复杂度O(1)
 
 ## 3.参考
 
 * [https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)
 * [https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/solution/mian-shi-ti-04-er-wei-shu-zu-zhong-de-cha-zhao-b-3/](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/solution/mian-shi-ti-04-er-wei-shu-zu-zhong-de-cha-zhao-b-3/)
-* [https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/solution/mian-shi-ti-04-er-wei-shu-zu-zhong-de-cha-zhao-zuo/](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/solution/mian-shi-ti-04-er-wei-shu-zu-zhong-de-cha-zhao-zuo/) 
-
+* [https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/solution/mian-shi-ti-04-er-wei-shu-zu-zhong-de-cha-zhao-zuo/](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/solution/mian-shi-ti-04-er-wei-shu-zu-zhong-de-cha-zhao-zuo/)\

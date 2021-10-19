@@ -19,11 +19,11 @@ description: 以下资料来自：《图解HTTP》、CS-Notes、CS（zcc）
 
 ### 1.2 公开密钥加密**--非对称加密**
 
-        公开密钥加密使用一对**非对称的密钥**。一把叫做私有密钥 \(private key\)，另一把叫做公开密钥\(public key\)。顾名思义，私有密钥不能让其他任何人知道，而公开密钥则可以随意发布，任何人都可以获得。--&gt;加密解密的密钥**不同**。
+&#x20;       公开密钥加密使用一对**非对称的密钥**。一把叫做私有密钥 (private key)，另一把叫做公开密钥(public key)。顾名思义，私有密钥不能让其他任何人知道，而公开密钥则可以随意发布，任何人都可以获得。-->加密解密的密钥**不同**。
 
-        使用公开密钥加密方式，发送密文的一方使用对方的公开密钥进行加密处理，对方收到被加密的信息后，再使用自己的私有密钥进行解密。利用这种方式，不需要发送用来解密的私有密钥，也不必担心密钥被攻击者窃听而盗走。
+&#x20;       使用公开密钥加密方式，发送密文的一方使用对方的公开密钥进行加密处理，对方收到被加密的信息后，再使用自己的私有密钥进行解密。利用这种方式，不需要发送用来解密的私有密钥，也不必担心密钥被攻击者窃听而盗走。
 
-![&#x975E;&#x5BF9;&#x79F0;&#x52A0;&#x5BC6;](../.gitbook/assets/wechat07d4fd84723c013bd27ba6958f9d0869.png)
+![非对称加密](../.gitbook/assets/wechat07d4fd84723c013bd27ba6958f9d0869.png)
 
 * 优点：可以更安全地将公开密钥传输给通信发送方；保证传输的安全性。
 * 缺点：运算速度慢。
@@ -39,7 +39,7 @@ description: 以下资料来自：《图解HTTP》、CS-Notes、CS（zcc）
 * 使用非对称密钥加密方式，传输对称密钥加密方式所需要的 Secret Key，从而保证安全性;
 * 获取到 Secret Key 后，再使用对称密钥加密方式进行通信，从而保证效率。
 
-![&#x6DF7;&#x5408;&#x52A0;&#x5BC6;&#x673A;&#x5236;](../.gitbook/assets/wechat5f32108561b2b583c93616c4c97b2853.png)
+![混合加密机制](../.gitbook/assets/wechat5f32108561b2b583c93616c4c97b2853.png)
 
 ## 2.HTTP缺点
 
@@ -47,29 +47,31 @@ description: 以下资料来自：《图解HTTP》、CS-Notes、CS（zcc）
 
 * **不加密**：通信使用明文（不加密），内容可能会被窃听
 * **不验证身份**：不验证通信方的身份，有可能遭遇伪装
-* **完整性无法保证** ：无法证明报文的完整性，有可能已遭篡改
+* **完整性无法保证 **：无法证明报文的完整性，有可能已遭篡改
 
 ## 3.网页访问网站流程、HTTP报文发送全过程\*
 
-{% page-ref page="url-trace.md" %}
+{% content-ref url="url-trace.md" %}
+[url-trace.md](url-trace.md)
+{% endcontent-ref %}
 
 [在浏览器中输入网址回车后发生了什么](url-trace.md)
 
 URL访问过程：
 
-![](../.gitbook/assets/image%20%2812%29.png)
+![](<../.gitbook/assets/image (12).png>)
 
 ## 4.HTTP状态码
 
 服务器返回的 **响应报文** 中第一行为状态行，包含了状态码以及原因短语，用来告知客户端请求的结果。
 
-| 状态码 | 类别 | 含义 |
-| :--- | :--- | :--- |
-| 1XX | Informational（信息性状态码） | 接收的请求正在处理 |
-| 2XX | Success（成功状态码） | 请求正常处理完毕 |
-| 3XX | Redirection（重定向状态码） | 需要进行附加操作以完成请求 |
-| 4XX | Client Error（客户端错误状态码） | 服务器无法处理请求 |
-| 5XX | Server Error（服务器错误状态码） | 服务器处理请求出错 |
+| 状态码 | 类别                     | 含义            |
+| --- | ---------------------- | ------------- |
+| 1XX | Informational（信息性状态码）  | 接收的请求正在处理     |
+| 2XX | Success（成功状态码）         | 请求正常处理完毕      |
+| 3XX | Redirection（重定向状态码）    | 需要进行附加操作以完成请求 |
+| 4XX | Client Error（客户端错误状态码） | 服务器无法处理请求     |
+| 5XX | Server Error（服务器错误状态码） | 服务器处理请求出错     |
 
 #### 1XX 信息
 
@@ -102,27 +104,27 @@ URL访问过程：
 * **500 Internal Server Error** ：服务器正在执行请求时发生错误。
 * **503 Service Unavailable** ：服务器暂时处于超负载或正在进行停机维护，现在无法处理请求。
 
-| 状态码 | 类别 | 原因短语 |
-| :--- | :--- | :--- |
-| **1XX** | **Informational\(信息性状态码\)** | **接收的请求正在处理** |
-| **2XX** | **Success\(成功状态码\)** | **请求正常处理完毕** |
-| 200 | OK | 请求正常处理完毕 |
-| 204 | No Content | 请求处理成功，但是没有资源返回 |
-| 206 | Partial Content | 请求处理成功，返回一部分资源&lt;–范围请求 |
-| **3XX** | **Redirection\(重定向状态码\)** | **需要进行附加操作以完成请求** |
-| 301 | Moved Permanently | 永久性重定向–&gt;请求资源的链接已永久性发生改变,书签需要更改链接 |
-| 302 | Found | 临时性重定向–&gt;希望访问临时改变的URI，书签中不需要更改链接 |
-| 303 | See Other | 请求对应的资源存在着另一个 URI，请使用GET方法进行获取 |
-| 304 | Not Modified | 服务器端允许请求访 问资源，但未满足条件的情况。&lt;– 条件访问 |
-| 307 | Temporary Redirect | 临时重定向–&gt;307 会遵照浏览器标准，不会从 POST 变成 GET。 |
-| **4XX** | **Client Error\(客户端错误状态码\)** | **服务器无法处理请求** |
-| 400 | Bad Request | 请求报文中存在语法错误 |
-| 401 | Unauthorized | 请求需要有通过 HTTP 认证\(BASIC 认证、 DIGEST 认证\)的认证信息 |
-| 403 | Forbidden | 请求资源的访问被服务器拒绝 |
-| 404 | Not Found | 请求的资源,服务器上无法找到 |
-| **5XX** | **Server Error\(服务器错误状态码\)** | **服务器处理请求出错** |
-| 500 | Internal Server Error | 服务器端在执行请求时发生了错误 |
-| 503 | Service Unavailable | 服务器暂时处于超负载或正在进行停机维护，现在无法 处理请求 |
+| 状态码     | 类别                         | 原因短语                                      |
+| ------- | -------------------------- | ----------------------------------------- |
+| **1XX** | **Informational(信息性状态码)**  | **接收的请求正在处理**                             |
+| **2XX** | **Success(成功状态码)**         | **请求正常处理完毕**                              |
+| 200     | OK                         | 请求正常处理完毕                                  |
+| 204     | No Content                 | 请求处理成功，但是没有资源返回                           |
+| 206     | Partial Content            | 请求处理成功，返回一部分资源<–范围请求                      |
+| **3XX** | **Redirection(重定向状态码)**    | **需要进行附加操作以完成请求**                         |
+| 301     | Moved Permanently          | 永久性重定向–>请求资源的链接已永久性发生改变,书签需要更改链接          |
+| 302     | Found                      | 临时性重定向–>希望访问临时改变的URI，书签中不需要更改链接           |
+| 303     | See Other                  | 请求对应的资源存在着另一个 URI，请使用GET方法进行获取            |
+| 304     | Not Modified               | 服务器端允许请求访 问资源，但未满足条件的情况。<– 条件访问           |
+| 307     | Temporary Redirect         | 临时重定向–>307 会遵照浏览器标准，不会从 POST 变成 GET。      |
+| **4XX** | **Client Error(客户端错误状态码)** | **服务器无法处理请求**                             |
+| 400     | Bad Request                | 请求报文中存在语法错误                               |
+| 401     | Unauthorized               | 请求需要有通过 HTTP 认证(BASIC 认证、 DIGEST 认证)的认证信息 |
+| 403     | Forbidden                  | 请求资源的访问被服务器拒绝                             |
+| 404     | Not Found                  | 请求的资源,服务器上无法找到                            |
+| **5XX** | **Server Error(服务器错误状态码)** | **服务器处理请求出错**                             |
+| 500     | Internal Server Error      | 服务器端在执行请求时发生了错误                           |
+| 503     | Service Unavailable        | 服务器暂时处于超负载或正在进行停机维护，现在无法 处理请求             |
 
 ## 5.HTTP首部
 
@@ -130,74 +132,74 @@ URL访问过程：
 
 ### 5.1 通用首部字段
 
-| 首部字段名 | 说明 |
-| :--- | :--- |
-| Cache-Control | 控制缓存的行为 |
-| Connection | 控制不再转发给代理的首部字段、管理持久连接 |
-| Date | 创建报文的日期时间 |
-| Pragma | 报文指令 |
-| Trailer | 报文末端的首部一览 |
-| Transfer-Encoding | 指定报文主体的传输编码方式 |
-| Upgrade | 升级为其他协议 |
-| Via | 代理服务器的相关信息 |
-| Warning | 错误通知 |
+| 首部字段名             | 说明                    |
+| ----------------- | --------------------- |
+| Cache-Control     | 控制缓存的行为               |
+| Connection        | 控制不再转发给代理的首部字段、管理持久连接 |
+| Date              | 创建报文的日期时间             |
+| Pragma            | 报文指令                  |
+| Trailer           | 报文末端的首部一览             |
+| Transfer-Encoding | 指定报文主体的传输编码方式         |
+| Upgrade           | 升级为其他协议               |
+| Via               | 代理服务器的相关信息            |
+| Warning           | 错误通知                  |
 
 ### 5.2 请求首部字段
 
-| 首部字段名 | 说明 |
-| :--- | :--- |
-| Accept | 用户代理可处理的媒体类型 |
-| Accept-Charset | 优先的字符集 |
-| Accept-Encoding | 优先的内容编码 |
-| Accept-Language | 优先的语言（自然语言） |
-| Authorization | Web 认证信息 |
-| Expect | 期待服务器的特定行为 |
-| From | 用户的电子邮箱地址 |
-| Host | 请求资源所在服务器 |
-| If-Match | 比较实体标记（ETag） |
-| If-Modified-Since | 比较资源的更新时间 |
-| If-None-Match | 比较实体标记（与 If-Match 相反） |
-| If-Range | 资源未更新时发送实体 Byte 的范围请求 |
+| 首部字段名               | 说明                                |
+| ------------------- | --------------------------------- |
+| Accept              | 用户代理可处理的媒体类型                      |
+| Accept-Charset      | 优先的字符集                            |
+| Accept-Encoding     | 优先的内容编码                           |
+| Accept-Language     | 优先的语言（自然语言）                       |
+| Authorization       | Web 认证信息                          |
+| Expect              | 期待服务器的特定行为                        |
+| From                | 用户的电子邮箱地址                         |
+| Host                | 请求资源所在服务器                         |
+| If-Match            | 比较实体标记（ETag）                      |
+| If-Modified-Since   | 比较资源的更新时间                         |
+| If-None-Match       | 比较实体标记（与 If-Match 相反）             |
+| If-Range            | 资源未更新时发送实体 Byte 的范围请求             |
 | If-Unmodified-Since | 比较资源的更新时间（与 If-Modified-Since 相反） |
-| Max-Forwards | 最大传输逐跳数 |
-| Proxy-Authorization | 代理服务器要求客户端的认证信息 |
-| Range | 实体的字节范围请求 |
-| Referer | 对请求中 URI 的原始获取方 |
-| TE | 传输编码的优先级 |
-| User-Agent | HTTP 客户端程序的信息 |
+| Max-Forwards        | 最大传输逐跳数                           |
+| Proxy-Authorization | 代理服务器要求客户端的认证信息                   |
+| Range               | 实体的字节范围请求                         |
+| Referer             | 对请求中 URI 的原始获取方                   |
+| TE                  | 传输编码的优先级                          |
+| User-Agent          | HTTP 客户端程序的信息                     |
 
 ### 5.3 响应首部字段
 
-| 首部字段名 | 说明 |
-| :--- | :--- |
-| Accept-Ranges | 是否接受字节范围请求 |
-| Age | 推算资源创建经过时间 |
-| ETag | 资源的匹配信息 |
-| Location | 令客户端重定向至指定 URI |
+| 首部字段名              | 说明             |
+| ------------------ | -------------- |
+| Accept-Ranges      | 是否接受字节范围请求     |
+| Age                | 推算资源创建经过时间     |
+| ETag               | 资源的匹配信息        |
+| Location           | 令客户端重定向至指定 URI |
 | Proxy-Authenticate | 代理服务器对客户端的认证信息 |
-| Retry-After | 对再次发起请求的时机要求 |
-| Server | HTTP 服务器的安装信息 |
-| Vary | 代理服务器缓存的管理信息 |
-| WWW-Authenticate | 服务器对客户端的认证信息 |
+| Retry-After        | 对再次发起请求的时机要求   |
+| Server             | HTTP 服务器的安装信息  |
+| Vary               | 代理服务器缓存的管理信息   |
+| WWW-Authenticate   | 服务器对客户端的认证信息   |
 
 ### 5.4 实体首部字段
 
-| 首部字段名 | 说明 |
-| :--- | :--- |
-| Allow | 资源可支持的 HTTP 方法 |
-| Content-Encoding | 实体主体适用的编码方式 |
-| Content-Language | 实体主体的自然语言 |
-| Content-Length | 实体主体的大小 |
-| Content-Location | 替代对应资源的 URI |
-| Content-MD5 | 实体主体的报文摘要 |
-| Content-Range | 实体主体的位置范围 |
-| Content-Type | 实体主体的媒体类型 |
-| Expires | 实体主体过期的日期时间 |
-| Last-Modified | 资源的最后修改日期时间 |
+| 首部字段名            | 说明             |
+| ---------------- | -------------- |
+| Allow            | 资源可支持的 HTTP 方法 |
+| Content-Encoding | 实体主体适用的编码方式    |
+| Content-Language | 实体主体的自然语言      |
+| Content-Length   | 实体主体的大小        |
+| Content-Location | 替代对应资源的 URI    |
+| Content-MD5      | 实体主体的报文摘要      |
+| Content-Range    | 实体主体的位置范围      |
+| Content-Type     | 实体主体的媒体类型      |
+| Expires          | 实体主体过期的日期时间    |
+| Last-Modified    | 资源的最后修改日期时间    |
 
 
 
-## 
+##
 
 ## 6.Cookie和Session\*
 
@@ -221,7 +223,7 @@ Cookie 曾一度用于客户端数据的存储，因为当时并没有其它合�
 
 服务器发送的响应报文包含 Set-Cookie 首部字段，客户端得到响应报文后把 Cookie 内容保存到浏览器中。
 
-```text
+```
  HTTP/1.1 200 OK
  Content-type: text/html
  Set-Cookie: yummy_cookie=choco
@@ -230,9 +232,9 @@ Cookie 曾一度用于客户端数据的存储，因为当时并没有其它合�
  [page content]
 ```
 
-客户端之后对同一个服务器发送请求时，会从浏览器中取出 Cookie 信息并通过 Cookie 请求首部字段发送给服务器。\[将Cookie信息一同请求发送到服务器\]
+客户端之后对同一个服务器发送请求时，会从浏览器中取出 Cookie 信息并通过 Cookie 请求首部字段发送给服务器。\[将Cookie信息一同请求发送到服务器]
 
-```text
+```
  GET /sample_page.html HTTP/1.1
  Host: www.example.org
  Cookie: yummy_cookie=choco; tasty_cookie=strawberry
@@ -243,7 +245,7 @@ Cookie 曾一度用于客户端数据的存储，因为当时并没有其它合�
 * 会话期 Cookie：浏览器关闭之后它会被自动删除，也就是说它**仅在会话期内有效**。
 * 持久性 Cookie：指定过期时间（Expires）或有效期（max-age）之后就成为了持久性的 Cookie。
 
-```text
+```
  Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT;// 设置过期时间
 ```
 
@@ -251,7 +253,7 @@ Cookie 曾一度用于客户端数据的存储，因为当时并没有其它合�
 
 Domain 标识指定了哪些主机可以接受 Cookie。如果不指定，默认为创建Cookie的服务器域名（不包含子域名）。如果指定了 Domain，则一般包含子域名。例如，如果设置 Domain=mozilla.org，则 Cookie 也包含在子域名中（如 developer.mozilla.org）。
 
-Path 标识指定了主机下的哪些路径可以接受 Cookie（该 URL 路径必须存在于请求 URL 中）。以字符 %x2F \("/"\) 作为路径分隔符，子路径也会被匹配。例如，设置 Path=/docs，则以下地址都会匹配：【如果不指定，默认为文档所在的文件目录】
+Path 标识指定了主机下的哪些路径可以接受 Cookie（该 URL 路径必须存在于请求 URL 中）。以字符 %x2F ("/") 作为路径分隔符，子路径也会被匹配。例如，设置 Path=/docs，则以下地址都会匹配：【如果不指定，默认为文档所在的文件目录】
 
 * /docs
 * /docs/Web/
@@ -261,7 +263,7 @@ Path 标识指定了主机下的哪些路径可以接受 Cookie（该 URL 路径
 
 浏览器通过 `document.cookie` 属性可创建新的 Cookie，也可通过该属性访问非 HttpOnly 标记的 Cookie。【HttpOnly属性可以防止javaScript访问Cookie，只允许HTTP协议访问】
 
-```text
+```
  document.cookie = "yummy_cookie=choco";
  document.cookie = "tasty_cookie=strawberry";
  console.log(document.cookie);
@@ -269,9 +271,9 @@ Path 标识指定了主机下的哪些路径可以接受 Cookie（该 URL 路径
 
 **6. HttpOnly**
 
-标记为 HttpOnly 的 Cookie 不能被 JavaScript 脚本调用。跨站脚本攻击 \(XSS\) 常常使用 JavaScript 的 `document.cookie` API 窃取用户的 Cookie 信息，因此使用 HttpOnly 标记可以在一定程度上避免 XSS 攻击。
+标记为 HttpOnly 的 Cookie 不能被 JavaScript 脚本调用。跨站脚本攻击 (XSS) 常常使用 JavaScript 的 `document.cookie` API 窃取用户的 Cookie 信息，因此使用 HttpOnly 标记可以在一定程度上避免 XSS 攻击。
 
-```text
+```
  Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Secure; HttpOnly
 ```
 
@@ -308,7 +310,7 @@ Session 可以存储在服务器上的文件、数据库或者内存中。也可
 
 ## 7.HTTP实现方式\*
 
-> HTTP协议在应用层，那肯定是基于传输层来实现的，是基于传输层的TCP实现的。
+> &#x20;HTTP协议在应用层，那肯定是基于传输层来实现的，是基于传输层的TCP实现的。
 
 参考链接：[https://www.runoob.com/http/http-intro.html](https://www.runoob.com/http/http-intro.html)
 
@@ -316,7 +318,7 @@ HTTP协议是Hyper Text Transfer Protocol（超文本传输协议）的缩写,�
 
 HTTP是一个**基于TCP/IP通信协议**来传递数据（HTML 文件, 图片文件, 查询结果等）。
 
-超文本传输协议（HTTP，HyperText Transfer Protocol\)是互联网上应用最为广泛的一种网络协议。设计 HTTP 最初的目的是为了提供一种**发布和接收 HTML 页面的方法**。HTTP 协议是以**明文**方式发送信息的，如果黑客截取了 Web 浏览器和服务器之间的传输报文，就可以直接获得其中的信息。
+超文本传输协议（HTTP，HyperText Transfer Protocol)是互联网上应用最为广泛的一种网络协议。设计 HTTP 最初的目的是为了提供一种**发布和接收 HTML 页面的方法**。HTTP 协议是以**明文**方式发送信息的，如果黑客截取了 Web 浏览器和服务器之间的传输报文，就可以直接获得其中的信息。
 
 ① 客户端的浏览器首先要通过 TCP 与服务器建立连接，一般 TCP 连接的端口号是80。 建立连接后，客户机发送一个请求给服务器，请求方式的格式为：统一资源标识符（URL）、协议版本号，后边是 MIME 信息包括请求修饰符、客户机信息和许可内容。
 
@@ -340,11 +342,11 @@ HTTP默认端口号为80，但是你也可以改为8080或者其他端口。
 
 以下图表展示了HTTP协议通信流程：
 
-![HTTP&#x534F;&#x8BAE;&#x901A;&#x4FE1;&#x6D41;&#x7A0B;](../.gitbook/assets/image%20%286%29.png)
+![HTTP协议通信流程](<../.gitbook/assets/image (6).png>)
 
 注：CGI是外部应用程序与WEB服务器之间的接口标准。
 
-MIME\(Multipurpose Internet Mail Extensions\):多用途互联网邮件扩展类型
+MIME(Multipurpose Internet Mail Extensions):多用途互联网邮件扩展类型
 
 ## ^8.抓包 Wire shark
 
@@ -368,15 +370,15 @@ HTTP/1.1 通过 Cache-Control 首部字段来**控制缓存**。
 
 no-store 指令规定不能对请求或响应的任何一部分进行缓存。
 
-```text
+```
  Cache-Control: no-store
 ```
 
 #### **3.2 强制确认缓存**
 
-**no-cache** 指令规定缓存服务器需要先向源服务器验证缓存资源的**有效性**，只有当缓存资源有效时才能使用该缓存对客户端的请求进行响应。
+**no-cache **指令规定缓存服务器需要先向源服务器验证缓存资源的**有效性**，只有当缓存资源有效时才能使用该缓存对客户端的请求进行响应。
 
-```text
+```
  Cache-Control: no-cache
 ```
 
@@ -384,13 +386,13 @@ no-store 指令规定不能对请求或响应的任何一部分进行缓存。
 
 private 指令规定了将资源作为私有缓存，只能被单独用户使用，一般存储在用户浏览器中。
 
-```text
+```
  Cache-Control: private
 ```
 
 public 指令规定了将资源作为公共缓存，可以被多个用户使用，一般存储在代理服务器中。
 
-```text
+```
  Cache-Control: public
 ```
 
@@ -400,13 +402,13 @@ max-age 指令出现在请求报文，并且缓存资源的缓存时间小于该
 
 max-age 指令出现在响应报文，表示缓存资源在缓存服务器中保存的时间。
 
-```text
+```
  Cache-Control: max-age=31536000
 ```
 
 Expires 首部字段也可以用于告知缓存服务器该资源什么时候会**过期**。
 
-```text
+```
  Expires: Wed, 04 Jul 2012 08:26:05 GMT
 ```
 
@@ -417,23 +419,23 @@ Expires 首部字段也可以用于告知缓存服务器该资源什么时候会
 
 需要先了解 ETag 首部字段的含义，它是资源的唯一标识。URL 不能唯一表示资源，例如 `http://www.google.com/` 有中文和英文两个资源，只有 ETag 才能对这两个资源进行唯一标识。
 
-```text
+```
  ETag: "82e22293907ce725faf67773957acd12"
 ```
 
 可以将缓存资源的 ETag 值放入 If-None-Match 首部，服务器收到该请求后，判断缓存资源的 ETag 值和资源的最新 ETag 值是否一致，如果一致则表示缓存资源有效，返回 304 Not Modified。
 
-```text
+```
  If-None-Match: "82e22293907ce725faf67773957acd12"
 ```
 
 Last-Modified 首部字段也可以用于缓存验证，它包含在源服务器发送的响应报文中，指示源服务器对资源的最后修改时间。但是它是一种弱校验器，因为只能精确到一秒，所以它通常作为 ETag 的备用方案。如果响应首部字段里含有这个信息，客户端可以在后续的请求中带上 If-Modified-Since 来验证缓存。服务器只在所请求的资源在给定的日期时间之后对内容进行过修改的情况下才会将资源返回，状态码为 200 OK。如果请求的资源从那时起未经修改，那么返回一个不带有实体主体的 304 Not Modified 响应报文。
 
-```text
+```
  Last-Modified: Wed, 21 Oct 2015 07:28:00 GMT
 ```
 
-```text
+```
  If-Modified-Since: Wed, 21 Oct 2015 07:28:00 GMT
 ```
 
@@ -452,7 +454,7 @@ Last-Modified 首部字段也可以用于缓存验证，它包含在源服务器
 * 一个空行用来分隔首部和内容主体 Body
 * 最后是请求的内容主体
 
-```text
+```
  GET http://www.example.com/ HTTP/1.1
  Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
  Accept-Encoding: gzip, deflate
@@ -475,7 +477,7 @@ Last-Modified 首部字段也可以用于缓存验证，它包含在源服务器
 * 一个空行分隔首部和内容主体
 * 最后是响应的内容主体
 
-```text
+```
  HTTP/1.1 200 OK
  Age: 529651
  Cache-Control: max-age=604800
@@ -524,11 +526,11 @@ _**HTTPS = HTTP + 加密 + 认证 + 完整性保护**_
 
 进行 HTTPS 通时，服务器会把证书发送给客户端。客户端取得其中的公开密钥之后，先使用数字签名进行验证，如果验证通过，就可以开始通信了。​
 
-![](../.gitbook/assets/image%20%2811%29.png)
+![](<../.gitbook/assets/image (11).png>)
 
 ### 11.3 完整性保护
 
-**SSL** 提供报文摘要功能来进行完整性保护。
+**SSL **提供报文摘要功能来进行完整性保护。
 
 HTTP 也提供了 MD5 报文摘要功能，但不是安全的。例如报文内容被篡改之后，同时重新计算 MD5 的值，通信接收方是无法意识到发生了篡改。
 
@@ -544,7 +546,7 @@ HTTP1和HTTP2的区别，HTTP2和HTTPS关系
 
 1. **HTTP1.1支持长连接和请求的流水线处理**
    1. **HTTP 1.0规定浏览器与服务器只保持短暂的连接**，浏览器的每次请求都需要与服务器建立一个TCP连接，服务器完成请求处理后立即断开TCP连接，服务器不跟踪每个客户也不记录过去的请求。
-   2. **HTTP 1.1则支持持久连接Persistent Connection,** 并且默认使用persistent connection。在同一个TCP的连接中可以传送多个HTTP请求和响应。多个请求和响应可以重叠，多个请求和响应可以同时进行。更加多的请求头和响应头\(比如HTTP1.0没有host的字段\)。
+   2. **HTTP 1.1则支持持久连接Persistent Connection,** 并且默认使用persistent connection。在同一个TCP的连接中可以传送多个HTTP请求和响应。多个请求和响应可以重叠，多个请求和响应可以同时进行。更加多的请求头和响应头(比如HTTP1.0没有host的字段)。
    3. **HTTP 1.1的持续连接，**也需要增加新的请求头来帮助实现，例如，Connection请求头的值为Keep-Alive时，客户端通知服务器返回本次请求结果后保持连接；Connection请求头的值为close时，客户端通知服务器返回本次请求结果后关闭连接。
 2. **支持管道（pipeline）网络传输，只要第一个请求发出去了，不必等其回来，就可以发第二个请求出去，可以减少整体的响应时间**。//就是流水线
    1. 请求的流水线（Pipelining）处理，在一个TCP连接上可以传送多个HTTP请求和响应，减少了建立和关闭连接的消耗和延迟。例如：一个包含有许多图像的网页文件的多个请求和应答可以在一个连接中传输，但每个单独的网页文件的请求和应答仍然需要使用各自的连接。 HTTP 1.1还允许客户端不用等待上一次请求结果返回，就可以发出下一次请求，但服务器端必须按照接收到客户端请求的先后顺序依次回送响应结果，以保证客户端能够区分出每次请求的响应内容。
@@ -610,7 +612,7 @@ l QUIC【QUIC（Quick UDP Internet Connection）是谷歌制定的一种基于UD
 
 l TLS3 升级成了最新的 1.3 版本，头部压缩算法也升级成了QPack 。
 
-​ - 运输层安全TLS \(Transport Layer Security\)。
+​ - 运输层安全TLS (Transport Layer Security)。
 
 l HTTPS 要建立一个连接，要花费 6 次交互，先是建立三次握手，然后是 TLS/1.3 的三次握手。QUIC 直接把以往的 TCP 和 TLS/1.3 的 6 次交互合并成了 3 次，减少了交互次数。
 
@@ -630,7 +632,7 @@ HTTP/1.x 实现简单是以牺牲性能为代价的：
 
 #### 二进制分帧层
 
-HTTP/2.0 将报文分成 HEADERS 帧和 DATA 帧，它们都是二进制格式的。​![](https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/86e6a91d-a285-447a-9345-c5484b8d0c47.png)  
+HTTP/2.0 将报文分成 HEADERS 帧和 DATA 帧，它们都是二进制格式的。​![](https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/86e6a91d-a285-447a-9345-c5484b8d0c47.png)\
 ​
 
 在通信过程中，只会有一个 TCP 连接存在，它承载了任意数量的双向数据流（Stream）。
@@ -639,14 +641,14 @@ HTTP/2.0 将报文分成 HEADERS 帧和 DATA 帧，它们都是二进制格式�
 * 消息（Message）是与逻辑请求或响应对应的完整的一系列帧。
 * 帧（Frame）是最小的通信单位，来自不同数据流的帧可以交错发送，然后再根据每个帧头的数据流标识符重新组装。
 
-​![](https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/af198da1-2480-4043-b07f-a3b91a88b815.png)  
+​![](https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/af198da1-2480-4043-b07f-a3b91a88b815.png)\
 ​
 
 #### 服务端推送
 
 HTTP/2.0 在客户端请求一个资源时，会把相关的资源一起发送给客户端，客户端就不需要再次发起请求了。例如客户端请求 page.html 页面，服务端就把 script.js 和 style.css 等与之相关的资源一起发给客户端。
 
-​![](https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/e3f1657c-80fc-4dfa-9643-bf51abd201c6.png)  
+​![](https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/e3f1657c-80fc-4dfa-9643-bf51abd201c6.png)\
 ​
 
 #### 首部压缩
@@ -655,7 +657,7 @@ HTTP/1.1 的首部带有大量信息，而且每次都要重复发送。
 
 HTTP/2.0 要求客户端和服务器同时维护和更新一个包含之前见过的首部字段表，从而避免了重复传输。
 
-不仅如此，HTTP/2.0 也使用 Huffman 编码对首部字段进行压缩。​![](https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/_u4E0B_u8F7D.png)  
+不仅如此，HTTP/2.0 也使用 Huffman 编码对首部字段进行压缩。​![](https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/\_u4E0B\_u8F7D.png)\
 ​
 
 HTTP/1.1 新特性
@@ -680,7 +682,7 @@ HTTP1.1 协议（RFC2616）**开始支持获取文件的部分内容**，这为�
 
 它通过在 Header 里两个参数实现的。
 
-* 客户端发请求时对应的是 **Range** 
+* 客户端发请求时对应的是 **Range**&#x20;
 * 服务器端响应时对应的是 **Content-Range**。
 
 ## 13.HTTP 8种方法
@@ -713,7 +715,7 @@ POST 主要用来传输数据，而 GET 主要用来获取资源。
 
 由于自身不带验证机制，任何人都可以上传文件，因此存在安全性问题，一般不使用该方法。
 
-```text
+```
  PUT /new.html HTTP/1.1
  Host: example.com
  Content-type: text/html
@@ -728,7 +730,7 @@ POST 主要用来传输数据，而 GET 主要用来获取资源。
 
 PUT 也可以用于修改资源，但是只能完全替代原始资源，PATCH 允许部分修改。
 
-```text
+```
  PATCH /file.txt HTTP/1.1
  Host: www.example.com
  Content-Type: application/example
@@ -744,7 +746,7 @@ PUT 也可以用于修改资源，但是只能完全替代原始资源，PATCH �
 
 与 PUT 功能相反，并且同样不带验证机制。
 
-```text
+```
  DELETE /file.html HTTP/1.1
 ```
 
@@ -762,11 +764,11 @@ PUT 也可以用于修改资源，但是只能完全替代原始资源，PATCH �
 
 使用 SSL（Secure Sockets Layer，安全套接层）和 TLS（Transport Layer Security，传输层安全）协议把通信内容加密后经网络隧道传输。
 
-```text
+```
  CONNECT www.example.com:443 HTTP/1.1
 ```
 
-​  
+​\
 ​
 
 ![](https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/dc00f70e-c5c8-4d20-baf1-2d70014a97e3.jpg)
@@ -801,6 +803,4 @@ HTTP 使用 URL（ **U** niform **R**esource **L**ocator，统一资源定位符
 ## POST和GET区别
 
 ## 攻击技术
-
-
 

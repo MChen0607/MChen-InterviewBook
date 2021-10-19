@@ -29,10 +29,10 @@
 ### 2.2 上手
 
 * [x] [《剑指offer》](algorithm/lcof/)【已完善】
-* 《程序员代码面试指南》
-* 《编程珠玑》
-* leetcode
-* 牛客网
+* [ ] 《程序员代码面试指南》
+* [ ] 《编程珠玑》
+* [ ] leetcode
+* [ ] 牛客网
 
 ## 3.计算机网络
 
@@ -75,13 +75,13 @@
 
 ### 7.2 上手
 
-* Spring 官网:[https://spring.io/](https://spring.io/)
+* Spring 官网:[https://spring.io/](https://spring.io)
   * 实战：《Spring4.x 企业级应用开发实战》
-* MyBatis官网:[https://mybatis.org/mybatis-3/ ](https://mybatis.org/mybatis-3/%20) 
-  * 优秀博客: [https://blog.csdn.net/nmgrd/article/details/54608702 ](https://blog.csdn.net/nmgrd/article/details/54608702%20)
-* Netty官网：[https://netty.io/ ](https://netty.io/%20)
-* Dubbo官网：[https://dubbo.apache.org/zh/ ](https://dubbo.apache.org/zh/%20)
-* Docker 官网：[https://docs.docker.com/ ](https://docs.docker.com/%20)
+* MyBatis官网:[https://mybatis.org/mybatis-3/ ](https://mybatis.org/mybatis-3/)&#x20;
+  * 优秀博客: [https://blog.csdn.net/nmgrd/article/details/54608702 ](https://blog.csdn.net/nmgrd/article/details/54608702)
+* Netty官网：[https://netty.io/ ](https://netty.io)
+* Dubbo官网：[https://dubbo.apache.org/zh/ ](https://dubbo.apache.org/zh/)
+* Docker 官网：[https://docs.docker.com/ ](https://docs.docker.com)
 
 
 
@@ -93,4 +93,3 @@
 
 * [ ] 讨论社区Community
 * [ ] 《大型网站技术架构·核心原理与案例分析》
-
