@@ -3,7 +3,7 @@
 * [哈哈哈](README.md)
 * [学习书籍整理](books.md)
 
-## 数据结构与算法 <a id="algorithm"></a>
+## 数据结构与算法 <a href="algorithm" id="algorithm"></a>
 
 * [面试题](algorithm/practice/README.md)
   * [反转链表【递归/迭代】](algorithm/practice/fan-zhuan-lian-biao.md)
@@ -88,13 +88,13 @@
   * [前缀和](algorithm/practice-1/profix/README.md)
     * [LC1109.航班预订统计](algorithm/practice-1/profix/lc1109.-hang-ban-yu-ding-tong-ji.md)
 
-## 计算机网络 <a id="computer-network"></a>
+## 计算机网络 <a href="computer-network" id="computer-network"></a>
 
 * [计算机网络](computer-network/network.md)
 * [《图解HTTP》](computer-network/http.md)
 * [URL访问过程](computer-network/url-trace.md)
 
-## 设计模式 <a id="design-pattern"></a>
+## 设计模式 <a href="design-pattern" id="design-pattern"></a>
 
 * [设计模式](design-pattern/design-patterns/README.md)
   * [单例模式](design-pattern/design-patterns/singleton.md)
@@ -104,6 +104,7 @@
   * [生成器模式](design-pattern/design-patterns/builder.md)
   * [原型模式](design-pattern/design-patterns/prototype.md)
   * [观察者模式](design-pattern/design-patterns/observer.md)
+  * [模版方法](design-pattern/design-patterns/template-method.md)
 
 ## Java
 
@@ -115,9 +116,8 @@
 
 ## 数据库
 
-* [MySQL试题](shu-ju-ku/mysql_practice.md)
+* [MySQL试题](shu-ju-ku/mysql\_practice.md)
 
-## 学习进度 <a id="learning-progress"></a>
+## 学习进度 <a href="learning-progress" id="learning-progress"></a>
 
 * [学习进度](learning-progress/xue-xi-jin-du.md)
-

@@ -7,10 +7,11 @@
 * [ ] 《Head First Java》
 * [ ] 《Java编程思想》
 * [ ] 《Effective Java》
+* [ ] 《java编程的逻辑》
 
 ### 1.2 JVM
 
-* [ ] 《深入理解Java虚拟机》
+* [ ] 《深入理解Java虚拟机》【看完理论部分】
 
 ### 1.3 Java并发与多线程
 
