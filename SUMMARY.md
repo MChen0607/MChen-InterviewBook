@@ -105,6 +105,7 @@
   * [原型模式](design-pattern/design-patterns/prototype.md)
   * [观察者模式](design-pattern/design-patterns/observer.md)
   * [模版方法](design-pattern/design-patterns/template-method.md)
+  * [享元模式](design-pattern/design-patterns/flyweight.md)
 
 ## Java
 
