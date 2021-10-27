@@ -96,16 +96,18 @@
 
 ## 设计模式 <a href="design-pattern" id="design-pattern"></a>
 
-* [设计模式](design-pattern/design-patterns/README.md)
-  * [单例模式](design-pattern/design-patterns/singleton.md)
-  * [简单工厂模式](design-pattern/design-patterns/simple-factory.md)
-  * [工厂方法模式](design-pattern/design-patterns/factory-method.md)
-  * [抽象工厂模式](design-pattern/design-patterns/abstract-factory.md)
-  * [生成器模式](design-pattern/design-patterns/builder.md)
-  * [原型模式](design-pattern/design-patterns/prototype.md)
-  * [观察者模式](design-pattern/design-patterns/observer.md)
-  * [模版方法](design-pattern/design-patterns/template-method.md)
-  * [享元模式](design-pattern/design-patterns/flyweight.md)
+* [创建型](design-pattern/creational-patterns/README.md)
+  * [单例模式](design-pattern/creational-patterns/singleton.md)
+  * [简单工厂模式](design-pattern/creational-patterns/simple-factory.md)
+  * [工厂方法模式](design-pattern/creational-patterns/factory-method.md)
+  * [抽象工厂模式](design-pattern/creational-patterns/abstract-factory.md)
+  * [生成器模式](design-pattern/creational-patterns/builder.md)
+  * [原型模式](design-pattern/creational-patterns/prototype.md)
+* [结构型](design-pattern/structural-patterns/README.md)
+  * [享元模式](design-pattern/structural-patterns/flyweight.md)
+* [行为型](design-pattern/behavioral-patterns/README.md)
+  * [观察者模式](design-pattern/behavioral-patterns/observer.md)
+  * [模版方法](design-pattern/behavioral-patterns/template-method.md)
 
 ## Java
 
