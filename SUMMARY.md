@@ -111,11 +111,13 @@
 
 ## Java
 
-* [Java](java/java/README.md)
-  * [java基础](java/java/java-base.md)
-  * [java虚拟机](java/java/jvm/README.md)
-    * [Java 内存区域](java/java/jvm/memory-area.md)
-    * [垃圾收集器与内存分配策略](java/java/jvm/gc.md)
+* [java基础](java/java-base/README.md)
+  * [java基础](java/java-base/java-base.md)
+* [java虚拟机](java/JVM/README.md)
+  * [Java 内存区域](java/JVM/memory-area.md)
+  * [垃圾收集器与内存分配策略](java/JVM/gc.md)
+* [Java并发](java/concurrent/README.md)
+  * [创建两个线程输出1-100](java/concurrent/double-thread-print-number.md)
 
 ## 数据库
 
