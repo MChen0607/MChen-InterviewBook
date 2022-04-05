@@ -99,7 +99,8 @@
 * [Java并发](java/concurrent/README.md)
   * [创建两个线程输出1-100](java/concurrent/double-thread-print-number.md)
 * [Java容器](java/java-container/README.md)
-  * [Page 1](java/java-container/page-1.md)
+  * [HashMap详解](java/java-container/page-1.md)
+  * [ConcurrentHashMap详解](java/java-container/concurrenthashmap-xiang-jie.md)
 * [Java IO](java/java-io/README.md)
   * [Page 2](java/java-io/page-2.md)
 
