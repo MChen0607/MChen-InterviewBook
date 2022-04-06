@@ -28,21 +28,27 @@
 
 #### 代码实现
 
-```
- public boolean findNumberIn2DArray(int[][] matrix, int target) {
-     if (matrix.length == 0 || matrix[0].length == 0) {
-         return false;
-     }
-     int m = matrix.length;
-     int n = matrix[0].length;
-     for (int i = 0; i < m; i++) {
-         for (int j = 0; j < n; j++) {
-             if (matrix[i][j] == target)
-                 return true;
-         }
-     }
-     return false;
- }
+```java
+/**
+ * 暴力法
+ * @param matrix 矩阵
+ * @param target 查找的数
+ * @return 是否查到
+ */
+public boolean findNumberIn2DArray(int[][] matrix, int target) {
+    if (matrix.length == 0 || matrix[0].length == 0) {
+        return false;
+    }
+    int m = matrix.length;
+    int n = matrix[0].length;
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            if (matrix[i][j] == target)
+                return true;
+        }
+    }
+    return false;
+}
 ```
 
 #### 复杂度分析
@@ -69,25 +75,32 @@
 
 #### 代码实现
 
-```
- public boolean findNumberIn2DArray2(int[][] matrix, int target) {
-     if(matrix==null||matrix.length==0||matrix[0].length==0){
-         return false;
-     }
-     int m=matrix.length;
-     int n=matrix[0].length;
-     int i=0,j=n-1;
-     while(i<m&&j>=0){
-         if(matrix[i][j]==target){
-             return true;
-         }else if(matrix[i][j]>target){
-             j--;
-         }else{
-             i++;
-         }
-     }
-     return false;
- }
+```java
+/**
+ * 线性查找  二叉排序数
+ *
+ * @param matrix 矩阵
+ * @param target 查找的数
+ * @return 是否查到
+ */
+public boolean findNumberIn2DArray2(int[][] matrix, int target) {
+    if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+        return false;
+    }
+    int m = matrix.length;
+    int n = matrix[0].length;
+    int i = 0, j = n - 1;
+    while (i < m && j >= 0) {
+        if (matrix[i][j] == target) {
+            return true;
+        } else if (matrix[i][j] > target) {
+            j--;
+        } else {
+            i++;
+        }
+    }
+    return false;
+}
 ```
 
 #### 复杂度分析
@@ -100,4 +113,4 @@
 
 * [https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)
 * [https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/solution/mian-shi-ti-04-er-wei-shu-zu-zhong-de-cha-zhao-b-3/](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/solution/mian-shi-ti-04-er-wei-shu-zu-zhong-de-cha-zhao-b-3/)
-* [https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/solution/mian-shi-ti-04-er-wei-shu-zu-zhong-de-cha-zhao-zuo/](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/solution/mian-shi-ti-04-er-wei-shu-zu-zhong-de-cha-zhao-zuo/)\
+* [https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/solution/mian-shi-ti-04-er-wei-shu-zu-zhong-de-cha-zhao-zuo/](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/solution/mian-shi-ti-04-er-wei-shu-zu-zhong-de-cha-zhao-zuo/)\\

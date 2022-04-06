@@ -50,22 +50,22 @@
 
 ```
  public int[] reversePrint2(ListNode head) {
-     if(head==null){
+     if (head == null) {
          return new int [0];
      }
-     int len=0;
-     ListNode premmyHead=head;
-     while (premmyHead!=null){
+     int len = 0;
+     ListNode dummyHead = head;
+     while (dummyHead != null) {
          len++;
-         premmyHead=premmyHead.next;
+         dummyHead = dummyHead.next;
      }
-     int []res=new int[len];
-     int i=1;
-     premmyHead=head;
-     while(premmyHead!=null){
-         res[len-i]=premmyHead.val;
+     int []res = new int[len];
+     int i = 1;
+     dummyHead = head;
+     while (dummyHead != null){
+         res[len-i] = dummyHead.val;
          i++;
-         premmyHead=premmyHead.next;
+         dummyHead = dummyHead.next;
      }
      return res;
  }
@@ -107,4 +107,4 @@
 ## 参考
 
 * [https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof](https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof)
-* [https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/solution/mian-shi-ti-06-cong-wei-dao-tou-da-yin-lian-biao-d/](https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/solution/mian-shi-ti-06-cong-wei-dao-tou-da-yin-lian-biao-d/)\
+* [https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/solution/mian-shi-ti-06-cong-wei-dao-tou-da-yin-lian-biao-d/](https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/solution/mian-shi-ti-06-cong-wei-dao-tou-da-yin-lian-biao-d/)\\
