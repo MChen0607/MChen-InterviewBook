@@ -10,55 +10,55 @@
 
 抽象工厂模式创建的是对象家族，也就是很多对象而不是一个对象，并且这些对象是相关的，也就是说必须一起创建出来。而工厂方法模式只是用于创建一个对象，这和抽象工厂模式有很大不同。
 
-抽象工厂模式用到了工厂方法模式来创建单一对象，AbstractFactory 中的 createProductA\(\) 和 createProductB\(\) 方法都是让子类来实现，这两个方法单独来看就是在创建一个对象，这符合工厂方法模式的定义。
+抽象工厂模式用到了工厂方法模式来创建单一对象，AbstractFactory 中的 createProductA() 和 createProductB() 方法都是让子类来实现，这两个方法单独来看就是在创建一个对象，这符合工厂方法模式的定义。
 
 至于创建对象的家族这一概念是在 Client 体现，Client 要通过 AbstractFactory 同时调用两个方法来创建出两个对象，在这里这两个对象就有很大的相关性，Client 需要同时创建出这两个对象。
 
-从高层次来看，抽象工厂使用了组合，即 Cilent 组合了 AbstractFactory，而工厂方法模式使用了继承。​   
+从高层次来看，抽象工厂使用了组合，即 Cilent 组合了 AbstractFactory，而工厂方法模式使用了继承。​\
 ​
 
-![](../../.gitbook/assets/image%20%283%29.png)
+![](<../../.gitbook/assets/image (3) (1).png>)
 
 ## Implementation
 
-```text
+```
  public class AbstractProductA {
  }
 ```
 
-```text
+```
  public class AbstractProductB {
  }
 ```
 
-```text
+```
  public class ProductA1 extends AbstractProductA {
  }
 ```
 
-```text
+```
  public class ProductA2 extends AbstractProductA {
  }
 ```
 
-```text
+```
  public class ProductB1 extends AbstractProductB {
  }
 ```
 
-```text
+```
  public class ProductB2 extends AbstractProductB {
  }
 ```
 
-```text
+```
  public abstract class AbstractFactory {
      abstract AbstractProductA createProductA();
      abstract AbstractProductB createProductB();
  }
 ```
 
-```text
+```
  public class ConcreteFactory1 extends AbstractFactory {
      AbstractProductA createProductA() {
          return new ProductA1();
@@ -70,7 +70,7 @@
  }
 ```
 
-```text
+```
 public class ConcreteFactory2 extends AbstractFactory {
     AbstractProductA createProductA() {
         return new ProductA2();
@@ -82,7 +82,7 @@ public class ConcreteFactory2 extends AbstractFactory {
 }
 ```
 
-```text
+```
 public class Client {
     public static void main(String[] args) {
         AbstractFactory abstractFactory = new ConcreteFactory1();
@@ -98,4 +98,3 @@ public class Client {
 * [javax.xml.parsers.DocumentBuilderFactory](http://docs.oracle.com/javase/8/docs/api/javax/xml/parsers/DocumentBuilderFactory.html)
 * [javax.xml.transform.TransformerFactory](http://docs.oracle.com/javase/8/docs/api/javax/xml/transform/TransformerFactory.html#newInstance--)
 * [javax.xml.xpath.XPathFactory](http://docs.oracle.com/javase/8/docs/api/javax/xml/xpath/XPathFactory.html#newInstance--)
-
